@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915749193055",
+    "project_id": "lrn-firebase-authen",
+    "storage_bucket": "lrn-firebase-authen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915749193055:android:bd25b05b72c19c2e7a22ea",
+        "android_client_info": {
+          "package_name": "com.example.learningauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6H_Qv2nFDGY6bOjB-zoNUFDG2CBpDSOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
