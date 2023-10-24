@@ -20,7 +20,6 @@ class SignInController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    startTimer();
   }
 
   void setPageIndex({required int index}) {
@@ -56,21 +55,6 @@ class SignInController extends GetxController {
       {required String password, required String confirmedPassword}) {
     isPasswordConfirmed.value = password == confirmedPassword;
     update();
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-          (timer) {
-        if (isSendEmail.value > 0) {
-          isSendEmail.value--;
-        } else {
-          timer.cancel();
-          isSendEmail.value = 30;
-        }
-        update();
-      },
-    );
   }
 
   void loginEmail(email, password) async {
@@ -134,11 +118,11 @@ class SignInController extends GetxController {
       if(secondsDifference > 1) {
         print("มากกว่า");
         // print("อยู่ตรงนี้${secondsDifference}");
-        var response2 = await HttpService.post('http://172.16.0.172:8080/updateData', userData);
+        var response2 = await HttpService.post('http://172.16.0.64:8000/updateData', userData);
         print({response2});
       }else {
         print("น้อยกว่า");
-        var response = await HttpService.post('http://172.16.0.172:8080/insertData', userData);
+        var response = await HttpService.post('http://172.16.0.64:8080/insertData', userData);
       }
       // print({response});
     } catch (e) {

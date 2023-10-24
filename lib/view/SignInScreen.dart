@@ -633,7 +633,7 @@ class _LoginScreenState extends State<SignInScreen> {
             Center(
               child: InkWell(
                 onTap: () {
-                  _signInWithGoogle(context);
+                  // _signInWithGoogle(context);
                   print("Sign in with google");
                 },
                 child: Container(
@@ -1551,7 +1551,7 @@ class _LoginScreenState extends State<SignInScreen> {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () => signInController.startTimer(),
+                    // onTap: () => signInController.startTimer(),
                     child: Container(
                       width: 200,
                       alignment: Alignment.center,
@@ -1576,82 +1576,82 @@ class _LoginScreenState extends State<SignInScreen> {
         });
   }
 
-
-  loginWithEmail(){
-    try{
-      AppLoader.loader(context);
-      if(_emailLogin.text.isNotEmpty && _passwordLogin.text.isNotEmpty){
-        FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailLogin.text, password: _passwordLogin.text).then((value) {
-        Get.offAllNamed('/dashboard');
-        }
-        );}}catch(e){
-      print(e);
-    }
-  }
-
-  Future<void> _signInWithGoogle(BuildContext context) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    try {
-      final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn(
-        clientId: '915749193055-b85tn40gkjuqt8iolpifv8ho7sddi96c.apps.googleusercontent.com',
-        scopes: [
-          'email',
-          'https://www.googleapis.com/auth/contacts.readonly',
-        ],
-      ).signIn();
-      final GoogleSignInAuthentication? googleSignInAuthentication =
-      await googleSignInAccount?.authentication;
-      if (googleSignInAccount != null && googleSignInAuthentication != null) {
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken,
-        );
-
-        // Show loader while processing
-        AppLoader.loader(context);
-
-        var data = await _auth.signInWithCredential(credential);
-
-        // Check if data.user is of type User before accessing properties
-        if (data.user is User) {
-          User user = data.user as User;
-
-          // Access properties like uid, displayName, email, etc.
-          var uid = user.uid;
-          var displayName = user.displayName;
-          var email = user.email;
-          var creationTime = user.metadata.creationTime.toString();
-          var lastSignInTime = user.metadata.lastSignInTime.toString();
-
-          Map<String, dynamic> userData = {
-            'UID': uid,
-            'name': displayName,
-            'email': email,
-            'create_time': creationTime,
-            'last_time': lastSignInTime,
-          };
-          // print(userData);
-          // var regis = Get.put(SignInController());
-          var regis = Get.find<SignInController>();
-          var userControl = Get.find<UserController>();
-
-          // Assuming register is a function that registers the user in your system
-          await regis.register(userData);
-          await userControl.getDataUser(email!);
-
-          // Navigate to the dashboard after successful registration
-          Get.offAllNamed('/dashboard');
-        } else {
-          // Handle the case when data.user is not a User object
-          print('Invalid data.user type: ${data.user.runtimeType}');
-        }
-      }
-    } on FirebaseAuthException catch (e) {
-      // Handle authentication exception
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.message ?? 'An error occurred'),
-      ));
-    }
-  }
+  //
+  // loginWithEmail(){
+  //   try{
+  //     AppLoader.loader(context);
+  //     if(_emailLogin.text.isNotEmpty && _passwordLogin.text.isNotEmpty){
+  //       FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailLogin.text, password: _passwordLogin.text).then((value) {
+  //       Get.offAllNamed('/dashboard');
+  //       }
+  //       );}}catch(e){
+  //     print(e);
+  //   }
+  // }
+  //
+  // Future<void> _signInWithGoogle(BuildContext context) async {
+  //   final FirebaseAuth _auth = FirebaseAuth.instance;
+  //   try {
+  //     final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn(
+  //       clientId: '915749193055-b85tn40gkjuqt8iolpifv8ho7sddi96c.apps.googleusercontent.com',
+  //       scopes: [
+  //         'email',
+  //         'https://www.googleapis.com/auth/contacts.readonly',
+  //       ],
+  //     ).signIn();
+  //     final GoogleSignInAuthentication? googleSignInAuthentication =
+  //     await googleSignInAccount?.authentication;
+  //     if (googleSignInAccount != null && googleSignInAuthentication != null) {
+  //       final AuthCredential credential = GoogleAuthProvider.credential(
+  //         accessToken: googleSignInAuthentication.accessToken,
+  //         idToken: googleSignInAuthentication.idToken,
+  //       );
+  //
+  //       // Show loader while processing
+  //       AppLoader.loader(context);
+  //
+  //       var data = await _auth.signInWithCredential(credential);
+  //
+  //       // Check if data.user is of type User before accessing properties
+  //       if (data.user is User) {
+  //         User user = data.user as User;
+  //
+  //         // Access properties like uid, displayName, email, etc.
+  //         var uid = user.uid;
+  //         var displayName = user.displayName;
+  //         var email = user.email;
+  //         var creationTime = user.metadata.creationTime.toString();
+  //         var lastSignInTime = user.metadata.lastSignInTime.toString();
+  //
+  //         Map<String, dynamic> userData = {
+  //           'UID': uid,
+  //           'name': displayName,
+  //           'email': email,
+  //           'create_time': creationTime,
+  //           'last_time': lastSignInTime,
+  //         };
+  //         // print(userData);
+  //         // var regis = Get.put(SignInController());
+  //         var regis = Get.find<SignInController>();
+  //         var userControl = Get.find<UserController>();
+  //
+  //         // Assuming register is a function that registers the user in your system
+  //         await regis.register(userData);
+  //         await userControl.getDataUser(email!);
+  //
+  //         // Navigate to the dashboard after successful registration
+  //         Get.offAllNamed('/dashboard');
+  //       } else {
+  //         // Handle the case when data.user is not a User object
+  //         print('Invalid data.user type: ${data.user.runtimeType}');
+  //       }
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     // Handle authentication exception
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(e.message ?? 'An error occurred'),
+  //     ));
+  //   }
+  // }
 
 }

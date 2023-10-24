@@ -11,13 +11,14 @@ class UserController extends GetxController {
 // ภายใน YourController
   RxList<Map<String, dynamic>> dataList = <Map<String, dynamic>>[].obs;
 
-  Future<void> getDataUser(String email) async {
+  Future<void> getDataUser() async {
     try {
+
       Map dataReq = {
-        'email':email
+        'email':"jitrawadee.wanichphon.pkg@gmail.com"
       };
       print(dataReq);
-      var response = await HttpService.post('http://172.16.0.172:8080/getdata', dataReq);
+      var response = await HttpService.post('http://172.16.0.64:8000/getdata', dataReq);
       print({response});
       if (response != null && response is List) {
         // แปลงประเภทข้อมูลเป็น List<Map<String, dynamic>>

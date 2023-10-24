@@ -4,7 +4,7 @@ import 'package:moneymaker/view/SignInScreen.dart';
 import 'app_routes.dart';
 
 class AppPages {
-  static const initial = Routes.signIn;
+  static const initial = Routes.dashboard;
 
   static final routes = [
     GetPage(

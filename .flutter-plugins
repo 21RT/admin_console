@@ -1,0 +1,23 @@
+# This is a generated file; do not edit or check into version control.
+firebase_auth=/Users/pang/.pub-cache/hosted/pub.dev/firebase_auth-4.10.1/
+firebase_auth_web=/Users/pang/.pub-cache/hosted/pub.dev/firebase_auth_web-5.8.2/
+firebase_core=/Users/pang/.pub-cache/hosted/pub.dev/firebase_core-2.17.0/
+firebase_core_web=/Users/pang/.pub-cache/hosted/pub.dev/firebase_core_web-2.8.0/
+flutter_secure_storage=/Users/pang/.pub-cache/hosted/pub.dev/flutter_secure_storage-8.1.0/
+flutter_secure_storage_linux=/Users/pang/.pub-cache/hosted/pub.dev/flutter_secure_storage_linux-1.2.0/
+flutter_secure_storage_macos=/Users/pang/.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.0.1/
+flutter_secure_storage_web=/Users/pang/.pub-cache/hosted/pub.dev/flutter_secure_storage_web-1.1.2/
+flutter_secure_storage_windows=/Users/pang/.pub-cache/hosted/pub.dev/flutter_secure_storage_windows-2.1.1/
+flutter_timezone=/Users/pang/.pub-cache/hosted/pub.dev/flutter_timezone-1.0.8/
+fluttertoast=/Users/pang/.pub-cache/hosted/pub.dev/fluttertoast-8.2.2/
+google_sign_in=/Users/pang/.pub-cache/hosted/pub.dev/google_sign_in-6.1.5/
+google_sign_in_android=/Users/pang/.pub-cache/hosted/pub.dev/google_sign_in_android-6.1.20/
+google_sign_in_ios=/Users/pang/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.6.4/
+google_sign_in_web=/Users/pang/.pub-cache/hosted/pub.dev/google_sign_in_web-0.12.0+4/
+url_launcher=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher-6.1.11/
+url_launcher_android=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher_android-6.1.0/
+url_launcher_ios=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.5/
+url_launcher_linux=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.6/
+url_launcher_macos=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.7/
+url_launcher_web=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher_web-2.0.19/
+url_launcher_windows=/Users/pang/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.8/

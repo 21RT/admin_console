@@ -4,18 +4,23 @@ import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moneymaker/controller/getController/components/appbarControl.dart';
 
 import 'package:moneymaker/controller/getController/userControl/userControl.dart';
+import 'package:moneymaker/controller/getController/userControl/userControl.dart';
 import 'package:moneymaker/controller/translation/translation_key.dart';
 import 'package:moneymaker/model/theme/app_constants.dart';
+import 'package:moneymaker/model/theme/sizebox_wiget.dart';
 import 'package:moneymaker/view/components/admin_drawer.dart';
 import 'package:moneymaker/view/components/appbar.dart';
 import 'package:moneymaker/view/components/responsive_builder.dart';
 import 'package:random_avatar/random_avatar.dart';
+
+import '../controller/getController/userControl/userControl.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -23,36 +28,51 @@ class DashboardScreen extends StatefulWidget {
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
-
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-final _scrollController = ScrollController();
-
-List firstNames = [
-  "Alice",
-  "Bob",
-  "Charlie",
-  "David",
-  "Eva",
-  "Frank",
-  "Grace",
-  "Helen",
-  "Ivy",
-  "Jack"
-];
-List lastNames = [
-  "Smith",
-  "Johnson",
-  "Brown",
-  "Davis",
-  "Lee",
-  "Wilson",
-  "Clark",
-  "Hall",
-  "Wright",
-  "Young"
-];
-
 class _DashboardScreenState extends State<DashboardScreen> {
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
+  final _scrollController = ScrollController();
+
+  List firstNames = [
+    "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Eva",
+    "Frank",
+    "Grace",
+    "Helen",
+    "Ivy",
+    "Jack"
+  ];
+  List lastNames = [
+    "Smith",
+    "Johnson",
+    "Brown",
+    "Davis",
+    "Lee",
+    "Wilson",
+    "Clark",
+    "Hall",
+    "Wright",
+    "Young"
+  ];
+
+  String selectedValue = '';
+  List<String> selectedValues = [];
+  List<String> options = ['', 'Activated','Status','PIN','Ask to recover PIN','Skip SMS verification','Referral Code','Inherit user','KYC Status','Extra Info'];
+  bool isFirstTime = true;
+  var userController = Get.find<UserController>();
+
+
+  @override
+  void initState() {
+    super.initState();
+    userController.getDataUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1275,218 +1295,326 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                               width: Get.width,
                               alignment: Alignment.center,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                          height: 70.0,
-                                          padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                              const Text(
-                                                // 'Top high engagement',
-                                                'บัญชีผู้ใช้งาน',
-                                                style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  color: kFontColor,
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 1.4,
-                                                ),
-                                              ),
-                                              Container(
-                                                height: 50,
-                                                width: 200,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.purpleAccent.withOpacity(0.2),
-                                                    borderRadius: BorderRadius.circular(10)),
-                                              ),
-                                              Container(
-                                                height: 20,
-                                                width: 20,
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.arrowsRotate,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                              )
-                                              // Text(
-                                              //   '01/10/23-31/12/23',
-                                              //   style: TextStyle(
-                                              //     fontSize: 14.0,
-                                              //     color: Colors.grey[700],
-                                              //     letterSpacing: 1.4,
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                      Container(
-                                        width: Get.width,
-                                        // padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
-                                        decoration: BoxDecoration(
-                                            color: Colors.purpleAccent.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(8)
-                                        ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        height: 70.0,
+                                        padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
                                         child: Row(
-                                    children: [
-                                        // buildHeadTable('SP', 100.0),
-                                        buildHeadTable('Name', 200.0),
-                                        buildHeadTable('E-mail', 300.0),
-                                        buildHeadTable('Create Time', 200.0),
-                                        buildHeadTable('UID', 250.0),
-                                        buildHeadTable('Last Time', 200.0),
-                                        // buildHeadTable('Activated', 80.0),
-                                        // buildHeadTable('PIN', 80.0),
-                                        // buildHeadTable('Ask to recover PIN', 180.0),
-                                        // buildHeadTable('Skip SMS verification', 200.0),
-                                        // buildHeadTable('Last login at', 150.0),
-                                        // buildHeadTable('Unique token', 150.0),
-                                        // buildHeadTable('Referral Code', 150.0),
-                                        // buildHeadTable('Inherit user', 100.0),
-                                        // buildHeadTable('KYC Status', 100.0),
-                                        // buildHeadTable('Extra Info', 100.0),
-                                    ],
-                                  ),
-                                      ),
-                                      SizedBox(height: 10,),
-                                      Container(
-                                        height: 500,
-                                        width: Get.width,
-                                        // color: Colors.teal,
-                                        child: GetBuilder<UserController>(
-                                          init: UserController(),
-                                          builder: (userController) {
-                                            if (userController.dataList.isNotEmpty) {
-                                              return
-                                                ListView.builder(
-                                                  itemCount: userController.dataList.length,
-                                                  padding: EdgeInsets.all(10),
-                                                  itemBuilder: (context, index) {
-                                                    // Map<String, dynamic> userData = userController.dataList[index]['data'];
-                                                    return Column(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 200,
-                                                                child: Text(userController.dataList[index]['data']['name'] ?? '')),
-                                                            SizedBox(
-                                                              width: 300,
-                                                                child: Text(userController.dataList[index]['data']['email'])),
-                                                            SizedBox(
-                                                              width: 200,
-                                                                child: Text(userController.dataList[index]['data']['create_time'] ??'')),
-                                                            SizedBox(
-                                                                width: 250,
-                                                                child: Text(userController.dataList[index]['data']['UID'])),
-                                                            SizedBox(
-                                                                width: 200,
-                                                                child: Text(userController.dataList[index]['data']['last_time'] ?? '')),
-                                                          ],
-                                                        ),
-                                                        Divider(color: Colors.red,indent: 0,endIndent: 0,)
-                                                      ],
-                                                    );
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            const Text(
+                                              // 'Top high engagement',
+                                              'บัญชีผู้ใช้งาน',
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+                                                color: kFontColor,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 1.4,
+                                              ),
+                                            ),
+                                            SizedBox(width: 30,),
+                                            Container(
+                                              height: 30,
+                                              width: 200,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black.withOpacity(0.2),
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              child: Center(
+                                                child: DropdownButton<String>(
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  underline: Container(),
+                                                  value: selectedValue,
+                                                  isExpanded: false,
+                                                  onChanged: (String? newValue) {
+                                                    if (newValue != null) {
+                                                      selectedValues.add(newValue);
+                                                      options.remove(newValue);
+                                                    } else {
+                                                      selectedValues.remove(selectedValue);
+                                                    }
+                                                    isFirstTime = false;
+                                                    setState(() {});
+                                                    // setState(() {
+                                                    //   if (!selectedValues.contains(newValue)) {
+                                                    //     // เพิ่มค่าเฉพาะถ้ายังไม่มีอยู่
+                                                    //     selectedValues.add(newValue!);
+                                                    //     options.remove(newValue);
+                                                    //   }
+                                                    //   selectedValue = newValue!;
+                                                    //
+                                                    // });
                                                   },
-                                                );
-                                            } else {
-                                              return Text('No data available'); // หรือใส่ข้อความที่ต้องการแสดง
-                                            }
-                                          },
+                                                  items: options.map((String value) {
+                                                    return DropdownMenuItem<String>(
+                                                      value: value,
+                                                      child: Text(value),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ),
+                                            // Container(
+                                            //   height: 40,
+                                            //   width: 40,
+                                            //   decoration: BoxDecoration(
+                                            //       color: Colors.black.withOpacity(0.1),
+                                            //      shape: BoxShape.circle
+                                            //   ),
+                                            //   child: Center(
+                                            //     child: FaIcon(
+                                            //       FontAwesomeIcons.arrowsRotate,
+                                            //       color: Colors.white,
+                                            //       size: 20,
+                                            //     ),
+                                            //   ),
+                                            // )
+                                            // Text(
+                                            //   '01/10/23-31/12/23',
+                                            //   style: TextStyle(
+                                            //     fontSize: 14.0,
+                                            //     color: Colors.grey[700],
+                                            //     letterSpacing: 1.4,
+                                            //   ),
+                                            // ),
+                                          ],
                                         ),
-                                      )
-                                      // SingleChildScrollView(
-                                      //   padding: const EdgeInsets.symmetric(
-                                      //       horizontal: kSpacing / 2),
-                                      //   child: Column(
-                                      //     children: [
-                                      //       const SizedBox(height: kSpacing),
-                                      //       for (int i = 0; i < 100; i++)
-                                      //         Column(
-                                      //           children: [
-                                      //             Row(
-                                      //               children: <Widget>[
-                                      //                 Container(
-                                      //                   width: 50.0,
-                                      //                   alignment:
-                                      //                       Alignment.center,
-                                      //                   child: Text(
-                                      //                     '#${i + 1}',
-                                      //                     style: const TextStyle(
-                                      //                       fontSize: 16.0,
-                                      //                       color: kFontColor,
-                                      //                       fontWeight:
-                                      //                           FontWeight.bold,
-                                      //                       letterSpacing: 1.2,
-                                      //                     ),
-                                      //                   ),
-                                      //                 ),
-                                      //                 const SizedBox(
-                                      //                     width: kSpacing),
-                                      //                 Expanded(
-                                      //                   child: Row(
-                                      //                     children: <Widget>[
-                                      //                       CircleAvatar(
-                                      //                         radius: 24.0,
-                                      //                         child: SvgPicture
-                                      //                             .string(
-                                      //                           RandomAvatarString(
-                                      //                               (123 + i)
-                                      //                                   .toString()),
-                                      //                         ),
-                                      //                         // backgroundImage:SvgPicture.string(svgCode),
-                                      //                       ),
-                                      //                       const SizedBox(
-                                      //                           width: kSpacing),
-                                      //                       Text(
-                                      //                         '${firstNames[1]} ${lastNames[1]}',
-                                      //                         style:
-                                      //                             const TextStyle(
-                                      //                           fontSize: 16.0,
-                                      //                           color: kFontColor,
-                                      //                           letterSpacing:
-                                      //                               1.4,
-                                      //                         ),
-                                      //                       ),
-                                      //                     ],
-                                      //                   ),
-                                      //                 ),
-                                      //                 const SizedBox(
-                                      //                     width: kSpacing / 2),
-                                      //                 Container(
-                                      //                   width: 180.0,
-                                      //                   alignment:
-                                      //                       Alignment.centerRight,
-                                      //                   child: const Text(
-                                      //                     '234,701 BU Point ',
-                                      //                     style: TextStyle(
-                                      //                       fontSize: 14.0,
-                                      //                       color: kFontColor,
-                                      //                       fontWeight:
-                                      //                           FontWeight.bold,
-                                      //                       letterSpacing: 1.4,
-                                      //                     ),
-                                      //                   ),
-                                      //                 ),
-                                      //               ],
-                                      //             ),
-                                      //             Divider(
-                                      //               endIndent: kSpacing,
-                                      //               indent: kSpacing,
-                                      //               color: Colors.grey[200],
-                                      //               thickness: 1.0,
-                                      //             ),
-                                      //           ],
-                                      //         ),
-                                      //     ],
-                                      //   ),
-                                      // ),
-                                  ],
-                                ),
+                                      ),
+                                    Divider(color: Colors.black,thickness: 0.5,indent: 0,endIndent: 0,),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Container(
+                                        width: Get.width *2 ,
+                                        height:  Get.height - 100,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                // buildHeadTable('SP', 100.0),
+                                                buildHeadTable('Name', 200.0),
+                                                buildHeadTable('E-mail', 300.0),
+                                                buildHeadTable('Create Time', 200.0),
+                                                buildHeadTable('UID', 250.0),
+                                                buildHeadTable('Last Time', 200.0),
+                                                for(int i =0;i<selectedValues.length;i++)
+                                                  Row(
+                                                    children: [
+                                                      buildHeadTable(selectedValues[i], 200.0),
+                                                      GestureDetector(
+                                                        onTap: (){
+                                                          // selectedValues.remove(selectedValue);
+
+                                                          // เพิ่มตัวเลือกที่เลือกลงในรายการ options
+                                                          options.add(selectedValue);
+
+                                                          // อัปเดต state
+                                                          setState(() {});
+                                                        },
+                                                          child: Icon(Icons.close,size: 15,)),
+                                                    ],
+                                                  ),
+                                              ],
+                                            ),
+                                            Divider(color: Colors.black,thickness: 0.5,indent: 0,endIndent: 0,),
+                                            SizedBox(height: 10,),
+                                            Container(
+                                              height: 500,
+                                              width: Get.width*2 ,
+                                              // color: Colors.teal,
+                                              child: GetBuilder<UserController>(
+                                                init: UserController(),
+                                                builder: (userController) {
+                                                  if (userController.dataList.isNotEmpty) {
+                                                    return
+                                                      ListView.builder(
+                                                        scrollDirection: Axis.vertical,
+                                                        // itemCount: 20,
+                                                        itemCount: userController.dataList.length,
+                                                        padding: EdgeInsets.all(10),
+                                                        itemBuilder: (context, index) {
+
+                                                          // Map<String, dynamic> userData = userController.dataList[index]['data'];
+                                                          return Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            children: [
+                                                              Row(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                      width: 200,
+                                                                      child: Text(userController.dataList[index]['data']['name'] ?? '')),
+                                                                  SizedBox(
+                                                                      width: 300,
+                                                                      child: Text(userController.dataList[index]['data']['email'])),
+                                                                  SizedBox(
+                                                                    width: 200,
+                                                                    child: Text(
+                                                                      userController.dataList[index]['data']['create_time'].toString()// หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width: 250,
+                                                                      child: Text(userController.dataList[index]['data']['UID'])),
+                                                                  SizedBox(
+                                                                    width: 200,
+                                                                    child: Text(
+                                                                      userController.dataList[index]['data']['last_time'].toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Divider(color: Colors.grey,indent: 0,endIndent: 0,)
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                  } else {
+                                                    return Text('No data available'); // หรือใส่ข้อความที่ต้องการแสดง
+                                                  }
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(8),
+                                            color: Colors.black.withOpacity(0.2)
+                                          ),
+                                          child: Center(child: FaIcon(FontAwesomeIcons.anglesLeft,size: 15,color: Colors.white,)),
+                                        ),
+                                        SizedBox(width: 5,),
+                                        Container(
+                                          height: 30,
+                                            width: 100,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: Colors.black.withOpacity(0.2)
+                                            ),
+                                            child: Padding(
+                                              padding:  EdgeInsets.all(5.0),
+                                              child: Text("หน้า ",style: TextStyle(
+                                                color: Colors.white,
+                                              ),),
+                                            )),
+                                        SizedBox(width: 5,),
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: Colors.black.withOpacity(0.2)
+                                          ),
+                                          child: Center(child: FaIcon(FontAwesomeIcons.anglesRight,size: 15,color: Colors.white,)),
+                                        ),
+                                        SizedBox(width: 20,)
+                                      ],
+                                    ),
+                                    SizedBox(height: 10,),
+                                    // const SizedBox(height: kSpacing * 2),
+                                    // SingleChildScrollView(
+                                    //   padding: const EdgeInsets.symmetric(
+                                    //       horizontal: kSpacing / 2),
+                                    //   child: Column(
+                                    //     children: [
+                                    //       const SizedBox(height: kSpacing),
+                                    //       for (int i = 0; i < 100; i++)
+                                    //         Column(
+                                    //           children: [
+                                    //             Row(
+                                    //               children: <Widget>[
+                                    //                 Container(
+                                    //                   width: 50.0,
+                                    //                   alignment:
+                                    //                       Alignment.center,
+                                    //                   child: Text(
+                                    //                     '#${i + 1}',
+                                    //                     style: const TextStyle(
+                                    //                       fontSize: 16.0,
+                                    //                       color: kFontColor,
+                                    //                       fontWeight:
+                                    //                           FontWeight.bold,
+                                    //                       letterSpacing: 1.2,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //                 const SizedBox(
+                                    //                     width: kSpacing),
+                                    //                 Expanded(
+                                    //                   child: Row(
+                                    //                     children: <Widget>[
+                                    //                       CircleAvatar(
+                                    //                         radius: 24.0,
+                                    //                         child: SvgPicture
+                                    //                             .string(
+                                    //                           RandomAvatarString(
+                                    //                               (123 + i)
+                                    //                                   .toString()),
+                                    //                         ),
+                                    //                         // backgroundImage:SvgPicture.string(svgCode),
+                                    //                       ),
+                                    //                       const SizedBox(
+                                    //                           width: kSpacing),
+                                    //                       Text(
+                                    //                         '${firstNames[1]} ${lastNames[1]}',
+                                    //                         style:
+                                    //                             const TextStyle(
+                                    //                           fontSize: 16.0,
+                                    //                           color: kFontColor,
+                                    //                           letterSpacing:
+                                    //                               1.4,
+                                    //                         ),
+                                    //                       ),
+                                    //                     ],
+                                    //                   ),
+                                    //                 ),
+                                    //                 const SizedBox(
+                                    //                     width: kSpacing / 2),
+                                    //                 Container(
+                                    //                   width: 180.0,
+                                    //                   alignment:
+                                    //                       Alignment.centerRight,
+                                    //                   child: const Text(
+                                    //                     '234,701 BU Point ',
+                                    //                     style: TextStyle(
+                                    //                       fontSize: 14.0,
+                                    //                       color: kFontColor,
+                                    //                       fontWeight:
+                                    //                           FontWeight.bold,
+                                    //                       letterSpacing: 1.4,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //             Divider(
+                                    //               endIndent: kSpacing,
+                                    //               indent: kSpacing,
+                                    //               color: Colors.grey[200],
+                                    //               thickness: 1.0,
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                ],
                               ),
                             ),
                             const SizedBox(height: kSpacing * 2),
@@ -1519,22 +1647,68 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   buildPointReport() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
-        Text(
-          'รายงานการแลกเปลี่ยน / เดือน',
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Color(0xFF5271FF),
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.4,
+    return
+      Column(
+        children: [
+          Center(
+            child: Container(
+              width: 210,
+              height: 210,
+              color: Colors.indigo.withOpacity(0.3),
+              child: const Text(
+                  'ใส่รูปเหรียญ'
+              ),
+            ),
           ),
-        ),
-        SizedBox(height: kSpacing),
-        // Expanded(child: LineChartScreen())
-      ],
-    );
+          // SizedBox(height: 50,),
+          S.H(50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                color: Colors.indigo,
+                child: const Text(
+                  'ใส่รูปเหรียญ',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                width: 80,
+                height: 80,
+                alignment: Alignment.center,
+                child: Text(
+                  "12123.12121",
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              Container(
+                width: 80,
+                height: 80,
+                alignment: Alignment.center,
+                child: Text("->", style: TextStyle(fontSize: 12)),
+              ),
+              Container(
+                width: 80,
+                height: 80,
+                color: Colors.indigo,
+                child: const Text(
+                  'ใส่รูปเหรียญ',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                width: 80,
+                height: 80,
+                alignment: Alignment.center,
+                child: Text("12123.12121", style: TextStyle(fontSize: 12)),
+              ),
+            ],
+          ),
+          S.H(10),
+        ],
+      );
   }
 
   Widget buildSayHi() {
@@ -2756,4 +2930,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ],
     );
   }
+
+
+
 }

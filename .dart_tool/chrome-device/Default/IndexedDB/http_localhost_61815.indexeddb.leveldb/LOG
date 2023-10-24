@@ -1,0 +1,25 @@
+2023/10/20-14:00:09.343 8203 Reusing MANIFEST /private/var/folders/mh/nyz5802s4rzcrjrtb__64v3m0000gn/T/flutter_tools.vHmi5X/flutter_tools_chrome_device.xPSM6s/Default/IndexedDB/http_localhost_61815.indexeddb.leveldb/MANIFEST-000001
+2023/10/20-14:00:09.343 8203 Recovering log #34
+2023/10/20-14:00:09.343 8203 Reusing old log /private/var/folders/mh/nyz5802s4rzcrjrtb__64v3m0000gn/T/flutter_tools.vHmi5X/flutter_tools_chrome_device.xPSM6s/Default/IndexedDB/http_localhost_61815.indexeddb.leveldb/000034.log 
+2023/10/20-14:00:09.344 8203 Delete type=2 #32
+2023/10/20-14:00:09.363 b403 Level-0 table #39: started
+2023/10/20-14:00:09.368 b403 Level-0 table #39: 923 bytes OK
+2023/10/20-14:00:09.379 b403 Delete type=0 #34
+2023/10/20-14:00:09.383 b403 Manual compaction at level-0 from '\x00\x0c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0d\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0c\x00\x00\x05' @ 397 : 1
+2023/10/20-14:00:09.383 b403 Compacting 1@0 + 1@1 files
+2023/10/20-14:00:09.388 b403 Generated table #40@0: 38 keys, 886 bytes
+2023/10/20-14:00:09.388 b403 Compacted 1@0 + 1@1 files => 886 bytes
+2023/10/20-14:00:09.396 b403 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/20-14:00:09.396 b403 Delete type=2 #39
+2023/10/20-14:00:09.397 8203 Manual compaction at level-0 from '\x00\x0c\x00\x00\x05' @ 397 : 1 .. '\x00\x0d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/20-14:01:40.068 b403 Level-0 table #42: started
+2023/10/20-14:01:40.085 b403 Level-0 table #42: 928 bytes OK
+2023/10/20-14:01:40.095 b403 Delete type=0 #38
+2023/10/20-14:01:40.095 b403 Delete type=2 #36
+2023/10/20-14:01:40.096 8203 Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0d\x00\x00\x05' @ 430 : 1
+2023/10/20-14:01:40.096 8203 Compacting 1@0 + 1@1 files
+2023/10/20-14:01:40.100 8203 Generated table #43@0: 45 keys, 958 bytes
+2023/10/20-14:01:40.100 8203 Compacted 1@0 + 1@1 files => 958 bytes
+2023/10/20-14:01:40.107 8203 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/20-14:01:40.107 8203 Delete type=2 #42
+2023/10/20-14:01:40.108 8203 Manual compaction at level-0 from '\x00\x0d\x00\x00\x05' @ 430 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)
