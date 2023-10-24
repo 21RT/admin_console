@@ -18,7 +18,7 @@ class UserController extends GetxController {
         'email':"jitrawadee.wanichphon.pkg@gmail.com"
       };
       print(dataReq);
-      var response = await HttpService.post('http://172.16.0.64:8000/getdata', dataReq);
+      var response = await HttpService.post('http://172.16.1.44:8000/getdata', dataReq);
       print({response});
       if (response != null && response is List) {
         // แปลงประเภทข้อมูลเป็น List<Map<String, dynamic>>

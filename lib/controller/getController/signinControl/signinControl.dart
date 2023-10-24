@@ -118,11 +118,11 @@ class SignInController extends GetxController {
       if(secondsDifference > 1) {
         print("มากกว่า");
         // print("อยู่ตรงนี้${secondsDifference}");
-        var response2 = await HttpService.post('http://172.16.0.64:8000/updateData', userData);
+        var response2 = await HttpService.post('http://172.16.1.44:8000/updateData', userData);
         print({response2});
       }else {
         print("น้อยกว่า");
-        var response = await HttpService.post('http://172.16.0.64:8080/insertData', userData);
+        var response = await HttpService.post('http://172.16.1.44:8080/insertData', userData);
       }
       // print({response});
     } catch (e) {

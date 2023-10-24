@@ -47,3 +47,17 @@ class ImageVectorPath {
   static const imageCreateActivity = '$_folderPath/create.activity.svg';
   static const imageProgress = '$_folderPath/progress.svg';
 }
+
+
+class IconPath {
+  static const _folderPath = "assets/icon";
+
+  static const iconBCT = "$_folderPath/bitcoin.png";
+  static const iconETH = "$_folderPath/ethereum.png";
+  static const iconUSDT = "$_folderPath/usdt.png";
+  static const iconUSDC = "$_folderPath/usdc.png";
+  static const iconPaxGold = "$_folderPath/pax-gold.png";
+  static const iconEuro = "$_folderPath/euro.png";
+  static const iconBUSD = "$_folderPath/binance-usd.png";
+
+}

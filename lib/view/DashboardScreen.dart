@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moneymaker/controller/getController/components/appbarControl.dart';
+import 'package:moneymaker/controller/getController/settingControl/swapControl/swapSettingController.dart';
 
 import 'package:moneymaker/controller/getController/userControl/userControl.dart';
 import 'package:moneymaker/controller/getController/userControl/userControl.dart';
@@ -28,10 +29,9 @@ class DashboardScreen extends StatefulWidget {
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
+
 class _DashboardScreenState extends State<DashboardScreen> {
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
 
   final _scrollController = ScrollController();
 
@@ -62,10 +62,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   String selectedValue = '';
   List<String> selectedValues = [];
-  List<String> options = ['', 'Activated','Status','PIN','Ask to recover PIN','Skip SMS verification','Referral Code','Inherit user','KYC Status','Extra Info'];
+  List<String> options = [
+    '',
+    'Activated',
+    'Status',
+    'PIN',
+    'Ask to recover PIN',
+    'Skip SMS verification',
+    'Referral Code',
+    'Inherit user',
+    'KYC Status',
+    'Extra Info'
+  ];
   bool isFirstTime = true;
   var userController = Get.find<UserController>();
-
+  TextEditingController coinController = TextEditingController();
+  TextEditingController feeController = TextEditingController();
 
   @override
   void initState() {
@@ -76,11 +88,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Get.put(UserController()).getDataUser();
-        },backgroundColor: Colors.red,
-      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Get.put(UserController()).getDataUser();
+          },
+          backgroundColor: Colors.red,
+        ),
         key: _scaffoldKey,
         backgroundColor: Colors.white,
         endDrawer: AdminDrawer(),
@@ -1281,339 +1294,441 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             const SizedBox(height: kSpacing * 2),
                             Container(
                               height: 800,
-                              padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: kSpacing / 2),
                               decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(.1),
-                                        blurRadius: 1.0,
-                                      )
-                                    ],
-                                    borderRadius:
-                                        BorderRadius.circular(kBorderRadius),
-                                  ),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.1),
+                                    blurRadius: 1.0,
+                                  )
+                                ],
+                                borderRadius:
+                                    BorderRadius.circular(kBorderRadius),
+                              ),
                               width: Get.width,
                               alignment: Alignment.center,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        height: 70.0,
-                                        padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            const Text(
-                                              // 'Top high engagement',
-                                              'บัญชีผู้ใช้งาน',
-                                              style: TextStyle(
-                                                fontSize: 18.0,
-                                                color: kFontColor,
-                                                fontWeight: FontWeight.bold,
-                                                letterSpacing: 1.4,
-                                              ),
-                                            ),
-                                            SizedBox(width: 30,),
-                                            Container(
-                                              height: 30,
-                                              width: 200,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black.withOpacity(0.2),
-                                                borderRadius: BorderRadius.circular(5),
-                                              ),
-                                              child: Center(
-                                                child: DropdownButton<String>(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  underline: Container(),
-                                                  value: selectedValue,
-                                                  isExpanded: false,
-                                                  onChanged: (String? newValue) {
-                                                    if (newValue != null) {
-                                                      selectedValues.add(newValue);
-                                                      options.remove(newValue);
-                                                    } else {
-                                                      selectedValues.remove(selectedValue);
-                                                    }
-                                                    isFirstTime = false;
-                                                    setState(() {});
-                                                    // setState(() {
-                                                    //   if (!selectedValues.contains(newValue)) {
-                                                    //     // เพิ่มค่าเฉพาะถ้ายังไม่มีอยู่
-                                                    //     selectedValues.add(newValue!);
-                                                    //     options.remove(newValue);
-                                                    //   }
-                                                    //   selectedValue = newValue!;
-                                                    //
-                                                    // });
-                                                  },
-                                                  items: options.map((String value) {
-                                                    return DropdownMenuItem<String>(
-                                                      value: value,
-                                                      child: Text(value),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
-                                            ),
-                                            // Container(
-                                            //   height: 40,
-                                            //   width: 40,
-                                            //   decoration: BoxDecoration(
-                                            //       color: Colors.black.withOpacity(0.1),
-                                            //      shape: BoxShape.circle
-                                            //   ),
-                                            //   child: Center(
-                                            //     child: FaIcon(
-                                            //       FontAwesomeIcons.arrowsRotate,
-                                            //       color: Colors.white,
-                                            //       size: 20,
-                                            //     ),
-                                            //   ),
-                                            // )
-                                            // Text(
-                                            //   '01/10/23-31/12/23',
-                                            //   style: TextStyle(
-                                            //     fontSize: 14.0,
-                                            //     color: Colors.grey[700],
-                                            //     letterSpacing: 1.4,
-                                            //   ),
-                                            // ),
-                                          ],
-                                        ),
-                                      ),
-                                    Divider(color: Colors.black,thickness: 0.5,indent: 0,endIndent: 0,),
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Container(
-                                        width: Get.width *2 ,
-                                        height:  Get.height - 100,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                // buildHeadTable('SP', 100.0),
-                                                buildHeadTable('Name', 200.0),
-                                                buildHeadTable('E-mail', 300.0),
-                                                buildHeadTable('Create Time', 200.0),
-                                                buildHeadTable('UID', 250.0),
-                                                buildHeadTable('Last Time', 200.0),
-                                                for(int i =0;i<selectedValues.length;i++)
-                                                  Row(
-                                                    children: [
-                                                      buildHeadTable(selectedValues[i], 200.0),
-                                                      GestureDetector(
-                                                        onTap: (){
-                                                          // selectedValues.remove(selectedValue);
-
-                                                          // เพิ่มตัวเลือกที่เลือกลงในรายการ options
-                                                          options.add(selectedValue);
-
-                                                          // อัปเดต state
-                                                          setState(() {});
-                                                        },
-                                                          child: Icon(Icons.close,size: 15,)),
-                                                    ],
-                                                  ),
-                                              ],
-                                            ),
-                                            Divider(color: Colors.black,thickness: 0.5,indent: 0,endIndent: 0,),
-                                            SizedBox(height: 10,),
-                                            Container(
-                                              height: 500,
-                                              width: Get.width*2 ,
-                                              // color: Colors.teal,
-                                              child: GetBuilder<UserController>(
-                                                init: UserController(),
-                                                builder: (userController) {
-                                                  if (userController.dataList.isNotEmpty) {
-                                                    return
-                                                      ListView.builder(
-                                                        scrollDirection: Axis.vertical,
-                                                        // itemCount: 20,
-                                                        itemCount: userController.dataList.length,
-                                                        padding: EdgeInsets.all(10),
-                                                        itemBuilder: (context, index) {
-
-                                                          // Map<String, dynamic> userData = userController.dataList[index]['data'];
-                                                          return Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            children: [
-                                                              Row(
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                children: [
-                                                                  SizedBox(
-                                                                      width: 200,
-                                                                      child: Text(userController.dataList[index]['data']['name'] ?? '')),
-                                                                  SizedBox(
-                                                                      width: 300,
-                                                                      child: Text(userController.dataList[index]['data']['email'])),
-                                                                  SizedBox(
-                                                                    width: 200,
-                                                                    child: Text(
-                                                                      userController.dataList[index]['data']['create_time'].toString()// หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                      width: 250,
-                                                                      child: Text(userController.dataList[index]['data']['UID'])),
-                                                                  SizedBox(
-                                                                    width: 200,
-                                                                    child: Text(
-                                                                      userController.dataList[index]['data']['last_time'].toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                              Divider(color: Colors.grey,indent: 0,endIndent: 0,)
-                                                            ],
-                                                          );
-                                                        },
-                                                      );
-                                                  } else {
-                                                    return Text('No data available'); // หรือใส่ข้อความที่ต้องการแสดง
-                                                  }
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            color: Colors.black.withOpacity(0.2)
+                                children: [
+                                  Container(
+                                    height: 70.0,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: kSpacing / 2),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        const Text(
+                                          // 'Top high engagement',
+                                          'บัญชีผู้ใช้งาน',
+                                          style: TextStyle(
+                                            fontSize: 18.0,
+                                            color: kFontColor,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1.4,
                                           ),
-                                          child: Center(child: FaIcon(FontAwesomeIcons.anglesLeft,size: 15,color: Colors.white,)),
                                         ),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          height: 30,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              color: Colors.black.withOpacity(0.2)
-                                            ),
-                                            child: Padding(
-                                              padding:  EdgeInsets.all(5.0),
-                                              child: Text("หน้า ",style: TextStyle(
-                                                color: Colors.white,
-                                              ),),
-                                            )),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          height: 30,
+                                        SizedBox(
                                           width: 30,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              color: Colors.black.withOpacity(0.2)
-                                          ),
-                                          child: Center(child: FaIcon(FontAwesomeIcons.anglesRight,size: 15,color: Colors.white,)),
                                         ),
-                                        SizedBox(width: 20,)
+                                        Container(
+                                          height: 30,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.black.withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Center(
+                                            child: DropdownButton<String>(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              underline: Container(),
+                                              value: selectedValue,
+                                              isExpanded: false,
+                                              onChanged: (String? newValue) {
+                                                if (newValue != null) {
+                                                  selectedValues.add(newValue);
+                                                  options.remove(newValue);
+                                                } else {
+                                                  selectedValues
+                                                      .remove(selectedValue);
+                                                }
+                                                isFirstTime = false;
+                                                setState(() {});
+                                              },
+                                              items:
+                                                  options.map((String value) {
+                                                return DropdownMenuItem<String>(
+                                                  value: value,
+                                                  child: Text(value),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                        ),
+                                        // Container(
+                                        //   height: 40,
+                                        //   width: 40,
+                                        //   decoration: BoxDecoration(
+                                        //       color: Colors.black.withOpacity(0.1),
+                                        //      shape: BoxShape.circle
+                                        //   ),
+                                        //   child: Center(
+                                        //     child: FaIcon(
+                                        //       FontAwesomeIcons.arrowsRotate,
+                                        //       color: Colors.white,
+                                        //       size: 20,
+                                        //     ),
+                                        //   ),
+                                        // )
+                                        // Text(
+                                        //   '01/10/23-31/12/23',
+                                        //   style: TextStyle(
+                                        //     fontSize: 14.0,
+                                        //     color: Colors.grey[700],
+                                        //     letterSpacing: 1.4,
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
-                                    SizedBox(height: 10,),
-                                    // const SizedBox(height: kSpacing * 2),
-                                    // SingleChildScrollView(
-                                    //   padding: const EdgeInsets.symmetric(
-                                    //       horizontal: kSpacing / 2),
-                                    //   child: Column(
-                                    //     children: [
-                                    //       const SizedBox(height: kSpacing),
-                                    //       for (int i = 0; i < 100; i++)
-                                    //         Column(
-                                    //           children: [
-                                    //             Row(
-                                    //               children: <Widget>[
-                                    //                 Container(
-                                    //                   width: 50.0,
-                                    //                   alignment:
-                                    //                       Alignment.center,
-                                    //                   child: Text(
-                                    //                     '#${i + 1}',
-                                    //                     style: const TextStyle(
-                                    //                       fontSize: 16.0,
-                                    //                       color: kFontColor,
-                                    //                       fontWeight:
-                                    //                           FontWeight.bold,
-                                    //                       letterSpacing: 1.2,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //                 const SizedBox(
-                                    //                     width: kSpacing),
-                                    //                 Expanded(
-                                    //                   child: Row(
-                                    //                     children: <Widget>[
-                                    //                       CircleAvatar(
-                                    //                         radius: 24.0,
-                                    //                         child: SvgPicture
-                                    //                             .string(
-                                    //                           RandomAvatarString(
-                                    //                               (123 + i)
-                                    //                                   .toString()),
-                                    //                         ),
-                                    //                         // backgroundImage:SvgPicture.string(svgCode),
-                                    //                       ),
-                                    //                       const SizedBox(
-                                    //                           width: kSpacing),
-                                    //                       Text(
-                                    //                         '${firstNames[1]} ${lastNames[1]}',
-                                    //                         style:
-                                    //                             const TextStyle(
-                                    //                           fontSize: 16.0,
-                                    //                           color: kFontColor,
-                                    //                           letterSpacing:
-                                    //                               1.4,
-                                    //                         ),
-                                    //                       ),
-                                    //                     ],
-                                    //                   ),
-                                    //                 ),
-                                    //                 const SizedBox(
-                                    //                     width: kSpacing / 2),
-                                    //                 Container(
-                                    //                   width: 180.0,
-                                    //                   alignment:
-                                    //                       Alignment.centerRight,
-                                    //                   child: const Text(
-                                    //                     '234,701 BU Point ',
-                                    //                     style: TextStyle(
-                                    //                       fontSize: 14.0,
-                                    //                       color: kFontColor,
-                                    //                       fontWeight:
-                                    //                           FontWeight.bold,
-                                    //                       letterSpacing: 1.4,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //             Divider(
-                                    //               endIndent: kSpacing,
-                                    //               indent: kSpacing,
-                                    //               color: Colors.grey[200],
-                                    //               thickness: 1.0,
-                                    //             ),
-                                    //           ],
-                                    //         ),
-                                    //     ],
-                                    //   ),
-                                    // ),
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    thickness: 0.5,
+                                    indent: 0,
+                                    endIndent: 0,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Container(
+                                      width: Get.width * 2,
+                                      height: Get.height - 100,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              // buildHeadTable('SP', 100.0),
+                                              buildHeadTable('Name', 200.0),
+                                              buildHeadTable('E-mail', 300.0),
+                                              buildHeadTable(
+                                                  'Create Time', 200.0),
+                                              buildHeadTable('UID', 250.0),
+                                              buildHeadTable(
+                                                  'Last Time', 200.0),
+                                              for (int i = 0;
+                                                  i < selectedValues.length;
+                                                  i++)
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    GestureDetector(
+                                                        onTap: () {
+                                                          selectedValues.remove(
+                                                              selectedValue);
+                                                          options.insert(
+                                                              selectedValues
+                                                                  .indexOf(
+                                                                      selectedValue),
+                                                              selectedValue);
+                                                          setState(() {
+                                                            print("ปิด");
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          Icons.close,
+                                                          size: 15,
+                                                        )),
+                                                    Text(
+                                                      selectedValues[i],
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black),
+                                                    ),
+                                                    S.H(10)
+                                                    // buildHeadTable(selectedValues[i], 200.0),
+                                                  ],
+                                                ),
+                                            ],
+                                          ),
+                                          Divider(
+                                            color: Colors.black,
+                                            thickness: 0.5,
+                                            indent: 0,
+                                            endIndent: 0,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            height: 500,
+                                            width: Get.width * 2,
+                                            // color: Colors.teal,
+                                            child: GetBuilder<UserController>(
+                                              init: UserController(),
+                                              builder: (userController) {
+                                                if (userController
+                                                    .dataList.isNotEmpty) {
+                                                  return ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    // itemCount: 20,
+                                                    itemCount: userController
+                                                        .dataList.length,
+                                                    padding: EdgeInsets.all(10),
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      // Map<String, dynamic> userData = userController.dataList[index]['data'];
+                                                      return Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: 200,
+                                                                  child: Text(
+                                                                      userController.dataList[index]['data']
+                                                                              [
+                                                                              'name'] ??
+                                                                          '')),
+                                                              SizedBox(
+                                                                  width: 300,
+                                                                  child: Text(userController
+                                                                              .dataList[index]
+                                                                          [
+                                                                          'data']
+                                                                      [
+                                                                      'email'])),
+                                                              SizedBox(
+                                                                width: 200,
+                                                                child: Text(
+                                                                    userController
+                                                                        .dataList[
+                                                                            index]
+                                                                            [
+                                                                            'data']
+                                                                            [
+                                                                            'create_time']
+                                                                        .toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: 250,
+                                                                  child: Text(userController
+                                                                              .dataList[index]
+                                                                          [
+                                                                          'data']
+                                                                      ['UID'])),
+                                                              SizedBox(
+                                                                width: 200,
+                                                                child: Text(
+                                                                    userController
+                                                                        .dataList[
+                                                                            index]
+                                                                            [
+                                                                            'data']
+                                                                            [
+                                                                            'last_time']
+                                                                        .toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
+                                                                    ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Divider(
+                                                            color: Colors.grey,
+                                                            indent: 0,
+                                                            endIndent: 0,
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                } else {
+                                                  return Text(
+                                                      'No data available'); // หรือใส่ข้อความที่ต้องการแสดง
+                                                }
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color:
+                                                Colors.black.withOpacity(0.2)),
+                                        child: Center(
+                                            child: FaIcon(
+                                          FontAwesomeIcons.anglesLeft,
+                                          size: 15,
+                                          color: Colors.white,
+                                        )),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                          height: 30,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.black
+                                                  .withOpacity(0.2)),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Text(
+                                              "หน้า ",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          )),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color:
+                                                Colors.black.withOpacity(0.2)),
+                                        child: Center(
+                                            child: FaIcon(
+                                          FontAwesomeIcons.anglesRight,
+                                          size: 15,
+                                          color: Colors.white,
+                                        )),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  // const SizedBox(height: kSpacing * 2),
+                                  // SingleChildScrollView(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //       horizontal: kSpacing / 2),
+                                  //   child: Column(
+                                  //     children: [
+                                  //       const SizedBox(height: kSpacing),
+                                  //       for (int i = 0; i < 100; i++)
+                                  //         Column(
+                                  //           children: [
+                                  //             Row(
+                                  //               children: <Widget>[
+                                  //                 Container(
+                                  //                   width: 50.0,
+                                  //                   alignment:
+                                  //                       Alignment.center,
+                                  //                   child: Text(
+                                  //                     '#${i + 1}',
+                                  //                     style: const TextStyle(
+                                  //                       fontSize: 16.0,
+                                  //                       color: kFontColor,
+                                  //                       fontWeight:
+                                  //                           FontWeight.bold,
+                                  //                       letterSpacing: 1.2,
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //                 const SizedBox(
+                                  //                     width: kSpacing),
+                                  //                 Expanded(
+                                  //                   child: Row(
+                                  //                     children: <Widget>[
+                                  //                       CircleAvatar(
+                                  //                         radius: 24.0,
+                                  //                         child: SvgPicture
+                                  //                             .string(
+                                  //                           RandomAvatarString(
+                                  //                               (123 + i)
+                                  //                                   .toString()),
+                                  //                         ),
+                                  //                         // backgroundImage:SvgPicture.string(svgCode),
+                                  //                       ),
+                                  //                       const SizedBox(
+                                  //                           width: kSpacing),
+                                  //                       Text(
+                                  //                         '${firstNames[1]} ${lastNames[1]}',
+                                  //                         style:
+                                  //                             const TextStyle(
+                                  //                           fontSize: 16.0,
+                                  //                           color: kFontColor,
+                                  //                           letterSpacing:
+                                  //                               1.4,
+                                  //                         ),
+                                  //                       ),
+                                  //                     ],
+                                  //                   ),
+                                  //                 ),
+                                  //                 const SizedBox(
+                                  //                     width: kSpacing / 2),
+                                  //                 Container(
+                                  //                   width: 180.0,
+                                  //                   alignment:
+                                  //                       Alignment.centerRight,
+                                  //                   child: const Text(
+                                  //                     '234,701 BU Point ',
+                                  //                     style: TextStyle(
+                                  //                       fontSize: 14.0,
+                                  //                       color: kFontColor,
+                                  //                       fontWeight:
+                                  //                           FontWeight.bold,
+                                  //                       letterSpacing: 1.4,
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               ],
+                                  //             ),
+                                  //             Divider(
+                                  //               endIndent: kSpacing,
+                                  //               indent: kSpacing,
+                                  //               color: Colors.grey[200],
+                                  //               thickness: 1.0,
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -1638,7 +1753,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         height: 50,
         width: width,
         child: Padding(
-          padding:  EdgeInsets.all(10),
+          padding: EdgeInsets.all(15),
           child: Text(
             text,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -1646,70 +1761,408 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ));
   }
 
+  // buildPointReport() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: [
+  //       Column(
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         children: [
+  //           Center(
+  //             child: Container(
+  //               width: 200,
+  //               height: 200,
+  //               // color: Colors.indigo.withOpacity(0.3),
+  //               decoration: BoxDecoration(
+  //                 shape: BoxShape.circle,
+  //                 color: Colors.indigo.withOpacity(0.3),
+  //                 image: DecorationImage(
+  //                   image: AssetImage('assets/icon/usdt.png'),
+  //                   // fit: BoxFit.cover,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //           S.H(10),
+  //           Text('1 USD ~ 0.9990009990009991',style: TextStyle(color: Colors.white,fontSize: 18),),
+  //           S.H(50),
+  //           GestureDetector(
+  //             onTap: (){
+  //               showDialog(
+  //                   context: context,
+  //                   builder: (context) =>
+  //                       Material(
+  //                         color: Colors.transparent,
+  //                         child: Center(
+  //                           child: Container(
+  //                             height: 500,
+  //                             width: 500,
+  //                            decoration: BoxDecoration(
+  //                              color: Colors.white,
+  //                              borderRadius: BorderRadius.circular(10),
+  //                            ),child: Column(
+  //                             mainAxisAlignment: MainAxisAlignment.center,
+  //                             crossAxisAlignment: CrossAxisAlignment.center,
+  //                             children: [
+  //                               Padding(
+  //                                 padding:  EdgeInsets.only(left: 50,right: 50,),
+  //                                 child: Row(
+  //                                   crossAxisAlignment: CrossAxisAlignment.center,
+  //                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                                   children: [
+  //                                     Container(
+  //                                       height: 100,
+  //                                       width: 100,
+  //                                       decoration: BoxDecoration(
+  //                                         shape: BoxShape.circle,
+  //                                         color: Colors.teal,
+  //
+  //                                       ),
+  //                                     ),
+  //                                     Container(
+  //                                       height: 100,
+  //                                       width: 100,
+  //                                       decoration: BoxDecoration(
+  //                                         shape: BoxShape.circle,
+  //                                         color: Colors.purpleAccent.withOpacity(0.2),
+  //                                       ),
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                               FaIcon(FontAwesomeIcons.arrowRightArrowLeft,),
+  //                               Text("1.0000000000000",style: TextStyle(color: Colors.black,fontSize: 16),),
+  //                               Text("Fee"),
+  //                               Padding(
+  //                                 padding: const EdgeInsets.all(10.0),
+  //                                 child: TextFormField(
+  //                                   decoration: InputDecoration(
+  //                                     hintText: "Enter Amount",
+  //                                     hintStyle: TextStyle(color: Colors.grey),
+  //                                     border: OutlineInputBorder(
+  //                                       borderRadius: BorderRadius.circular(10),
+  //                                     ),
+  //                                   ),
+  //                                 ),
+  //                               ),
+  //                               Row(
+  //                                 children: [
+  //                                   Container(
+  //                                     height: 50,width: 150,color: Colors.redAccent,
+  //                                   ),
+  //                                   Container(
+  //                                     height: 50,width: 150,color: Colors.greenAccent
+  //                                   ),
+  //                                 ],
+  //                               )
+  //                             ],
+  //                           ),
+  //                           ),
+  //                         ),
+  //                       )
+  //               );
+  //             },
+  //             child: Container(
+  //               height: 50,width: 150,
+  //             decoration: BoxDecoration(
+  //               color: Colors.white.withOpacity(0.5),
+  //               borderRadius: BorderRadius.circular(5)
+  //             ),child: Center(
+  //               child: Text(
+  //                 'EDIT',
+  //                 style: TextStyle(
+  //                   color: Colors.white,
+  //                   fontSize: 20,
+  //                 ),
+  //               ),
+  //             ),),
+  //           )
+  //         ],
+  //       ),
+  //       Container(
+  //         width: 300,
+  //         height: 450,
+  //         alignment: Alignment.topLeft,
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             rowCoin('ใส่รูปเหรียญ', '12123'),
+  //             S.H(10),
+  //             rowCoin('ใส่รูปเหรียญ', '33333'),
+  //             S.H(10),
+  //             rowCoin('ใส่รูปเหรียญ', '1092'),
+  //             S.H(10),
+  //             rowCoin('ใส่รูปเหรียญ', '7458'),
+  //             S.H(10),
+  //             rowCoin('ใส่รูปเหรียญ', '12'),
+  //             S.H(10),
+  //             rowCoin('ใส่รูปเหรียญ', '7934'),
+  //             S.H(10),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
   buildPointReport() {
-    return
-      Column(
-        children: [
-          Center(
-            child: Container(
-              width: 210,
-              height: 210,
-              color: Colors.indigo.withOpacity(0.3),
-              child: const Text(
-                  'ใส่รูปเหรียญ'
-              ),
-            ),
-          ),
-          // SizedBox(height: 50,),
-          S.H(50),
-          Row(
+    return GetBuilder<SwapSettingController>(
+        init: SwapSettingController(),
+        builder: (swap) {
+          return Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 80,
-                height: 80,
-                color: Colors.indigo,
-                child: const Text(
-                  'ใส่รูปเหรียญ',
-                  style: TextStyle(fontSize: 20),
+                height: Get.height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      // decoration: BoxDecoration(
+                      //   color: Colors.white.withOpacity(0.5),
+                      //   shape: BoxShape.circle
+                      // ),
+                      // color: swap.showCoin["code"] == 'BTC' ? Colors.blue :swap.showCoin["code"] == 'ETH' ?Colors.cyan :swap.showCoin["code"] == 'USDT' ?Colors.deepOrange :swap.showCoin["code"] == 'BTC2' ?Colors.green :swap.showCoin["code"] == 'ETH2' ?Colors.indigo :swap.showCoin["code"] == 'USDT2' ?Colors.pink :Colors.purple,
+                      child: Image.asset(
+                        swap.showCoin["icon"],
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
+                    S.H(20),
+                    Text(
+                      "1 USD ~ XXXXXXXXXXX ${swap.showCoin["code"]}",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    S.H(20),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                showEdit(swap.showCoin["code"]));
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text('EDIT'),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
+              S.W(50),
               Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
-                child: Text(
-                  "12123.12121",
-                  style: TextStyle(fontSize: 12),
+                width: 300,
+                height: 450,
+                alignment: Alignment.topLeft,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                    swap.swapSetting.length,
+                    (index) => InkWell(
+                        onTap: () {
+                          swap.changeArray(index);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                swap.swapSetting[index]["icon"],
+                                width: 40,
+                                height: 40,
+                              ),
+                              S.W(10),
+                              rowCoin(
+                                swap.swapSetting[index]["code"],
+                                swap.swapSetting[index]["currency"],
+                              )
+                            ],
+                          ),
+                        )
+                        // rowCoin(swap.swapSetting[index]["code"], swap.swapSetting[index]["currency"],swap.swapSetting[index]["code"])),
+                        ),
+                  ),
                 ),
               ),
-              Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
-                child: Text("->", style: TextStyle(fontSize: 12)),
+            ],
+          );
+        });
+  }
+
+  /// row for each coin 'ใส่รูปเหรียญ'
+  Widget rowCoin(text, textCoin) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          // width: 40,
+          height: 50,
+          // alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                text.toString(),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              Container(
-                width: 80,
-                height: 80,
-                color: Colors.indigo,
-                child: const Text(
-                  'ใส่รูปเหรียญ',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
-                child: Text("12123.12121", style: TextStyle(fontSize: 12)),
+              Text(
+                textCoin.toString(),
+                style: TextStyle(fontSize: 12, color: Colors.white),
               ),
             ],
           ),
-          S.H(10),
-        ],
-      );
+        ),
+      ],
+    );
   }
+
+  Widget showEdit(textCoin) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          height: 500,
+          width: 500,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.purpleAccent.withOpacity(0.2),
+                          ),
+                        ),
+                        S.H(10),
+                        Text(
+                          textCoin,
+                          style: TextStyle(color: Colors.black, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    FaIcon(
+                      FontAwesomeIcons.arrowRightArrowLeft,
+                      color: Colors.black,
+                    ),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      child: Center(
+                        child: Text(
+                          "1 USD",
+                          style: TextStyle(color: Colors.black, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                S.H(10),
+                Text('จำนวนเหรียญ'),
+                Row(
+                  children: [
+                    Container(
+                      width: 200,
+                      child: TextFormField(
+                        controller: coinController,
+                        decoration: InputDecoration(
+                          hintText: "ใส่จำนวนเหรียญ",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            final valueCoin = Get.put(SwapSettingController());
+                            valueCoin.coinInsert = int.parse(value);
+                            print(valueCoin.coinInsert);
+                          });
+                        },
+                      ),
+                    ),
+                    S.W(20),
+                    Container(
+                      child: Text(
+                        '/ 1 USD',
+                        style: TextStyle(color: Colors.black, fontSize: 24),
+                      ),
+                    )
+                  ],
+                ),
+                S.H(10),
+                Text('Fee'),
+                Container(
+                  width: 200,
+                  child: TextFormField(
+                    controller: feeController,
+                    decoration: InputDecoration(
+                      hintText: "0",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        final valueCoin = Get.put(SwapSettingController());
+                        if(value == '' || value == null){
+                          valueCoin.fee = 0;
+                        }else{
+                          valueCoin.fee = int.parse(value);
+                        }
+                        print(valueCoin.fee);
+                      });
+                    },
+                  ),
+                ),
+                S.H(10),
+                Divider(color: Colors.black,),
+                S.H(25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(onPressed: (){
+                      Navigator.pop(context);
+                    }, child: Text('Cancel')),
+                    TextButton(onPressed: (){
+                      Navigator.pop(context);
+                    }, child: Text('Save'))
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+
 
   Widget buildSayHi() {
     return Row(
@@ -2930,7 +3383,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ],
     );
   }
-
-
-
 }

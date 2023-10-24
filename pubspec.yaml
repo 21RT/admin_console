@@ -57,6 +57,7 @@ flutter:
   assets:
     - assets/images/raster/
     - assets/images/vector/
+    - assets/icon/
 
   fonts:
     - family: Prompt
