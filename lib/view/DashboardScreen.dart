@@ -35,6 +35,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final _scrollController = ScrollController();
 
+  double padding = 0;
+
   List firstNames = [
     "Alice",
     "Bob",
@@ -91,6 +93,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // Get.put(UserController()).getDataUser();
+
+            if(padding == 30){
+              padding = 0;
+            } else {
+              padding = 30;
+            }
+
+            setState(() {});
           },
           backgroundColor: Colors.red,
         ),
@@ -1976,13 +1986,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         onTap: () {
                           swap.changeArray(index);
                         },
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 30),
-                          child: rowCoin(
-                              swap.swapSetting[index]["code"],
-                              swap.swapSetting[index]["currency"],
-                              swap.swapSetting[index]["icon"]
-                          )
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 500+ index*100),
+                          padding: EdgeInsets.only(left: padding),
+                            child: rowCoin(
+                                swap.swapSetting[index]["code"],
+                                swap.swapSetting[index]["currency"],
+                                swap.swapSetting[index]["icon"]
+                            ),
                         )
                         // rowCoin(swap.swapSetting[index]["code"], swap.swapSetting[index]["currency"],swap.swapSetting[index]["code"])),
                         ),
@@ -1996,12 +2007,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   /// row for each coin 'ใส่รูปเหรียญ'
   Widget rowCoin(text, textCoin, icon) {
+    // print(icon);
     return Row(
       children: [
-        Image.asset(
-          icon,
+        Container(
           width: 40,
           height: 40,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.5),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage(icon.toString()),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         S.W(10),
         Container(
