@@ -1912,14 +1912,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
         init: SwapSettingController(),
         builder: (swap) {
           return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 height: Get.height,
+                width: 230,
+                alignment: Alignment.topCenter,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-
                   children: [
                     Container(
                       width: 100,
@@ -1978,20 +1978,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         },
                         child: Padding(
                           padding: EdgeInsets.only(left: 30),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                swap.swapSetting[index]["icon"],
-                                width: 40,
-                                height: 40,
-                              ),
-                              S.W(10),
-                              rowCoin(
-                                swap.swapSetting[index]["code"],
-                                swap.swapSetting[index]["currency"],
-                              )
-                            ],
-                          ),
+                          child: rowCoin(
+                              swap.swapSetting[index]["code"],
+                              swap.swapSetting[index]["currency"],
+                              swap.swapSetting[index]["icon"]
+                          )
                         )
                         // rowCoin(swap.swapSetting[index]["code"], swap.swapSetting[index]["currency"],swap.swapSetting[index]["code"])),
                         ),
@@ -2004,11 +1995,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   /// row for each coin 'ใส่รูปเหรียญ'
-  Widget rowCoin(text, textCoin) {
+  Widget rowCoin(text, textCoin, icon) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Image.asset(
+          icon,
+          width: 40,
+          height: 40,
+        ),
+        S.W(10),
         Container(
           // width: 40,
           height: 50,
@@ -2149,12 +2144,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, child: Text('Cancel')),
-                    TextButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, child: Text('Save'))
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text('Cancel'),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.indigoAccent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text('Save'),
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -2262,209 +2281,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ],
     );
   }
-
-  // Widget buildTotalBalance() {
-  //   final isMobile = ResponsiveBuilder.isMobile(context);
-  //   final isTablet = ResponsiveBuilder.isTablet(context);
-  //   return GetBuilder<PocketController>(
-  //     init: PocketController(),
-  //     builder: (pocketController) {
-  //       if (isMobile) {
-  //         return Column(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: <Widget>[
-  //             Text(
-  //               totalBalance.tr,
-  //               style: const TextStyle(
-  //                 fontSize: 22.0,
-  //                 color: Colors.white,
-  //                 letterSpacing: 3.0,
-  //               ),
-  //             ),
-  //             const SizedBox(height: 5.0),
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //               crossAxisAlignment: CrossAxisAlignment.center,
-  //               children: <Widget>[
-  //                 AnimatedNumberText(
-  //                   pocketController.merchantInfo.value.walletBalance ?? 0, // int or double
-  //                   curve: Curves.easeIn,
-  //                   duration: const Duration(seconds: 1),
-  //                   softWrap: true,
-  //                   style: const TextStyle(
-  //                     fontSize: 32.0,
-  //                     color: Color(0xFF5271FF),
-  //                     fontWeight: FontWeight.bold,
-  //                     letterSpacing: 5.0,
-  //                   ),
-  //                   formatter: (value) {
-  //                     final formatted = NumberFormatService.currencyCoin('$value');
-  //                     return formatted;
-  //                   },
-  //                 ),
-  //                 const Text(
-  //                   'BU Point',
-  //                   style: TextStyle(
-  //                     fontSize: 18.0,
-  //                     color: Colors.white,
-  //                     fontWeight: FontWeight.bold,
-  //                     letterSpacing: 2.0,
-  //                   ),
-  //                 )
-  //               ],
-  //             ),
-  //             const SizedBox(height: 5.0),
-  //             Row(
-  //               children: <Widget>[
-  //                 const Icon(
-  //                   EvaIcons.calendarOutline,
-  //                   size: 24.0,
-  //                   color: Colors.white,
-  //                 ),
-  //                 const SizedBox(width: kSpacing / 2),
-  //                 Text(
-  //                   DateFormat('EEE,d MMM yyyy').format(DateTime.now()),
-  //                   style: const TextStyle(
-  //                     fontSize: 18.0,
-  //                     color: Colors.white,
-  //                     letterSpacing: 3.0,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ],
-  //         );
-  //       } else if (isTablet) {
-  //         return Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: <Widget>[
-  //             Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: <Widget>[
-  //                 Text(
-  //                   totalBalance.tr,
-  //                   style: const TextStyle(
-  //                     fontSize: 22.0,
-  //                     color: Colors.white,
-  //                     letterSpacing: 3.0,
-  //                   ),
-  //                 ),
-  //                 Row(
-  //                   children: <Widget>[
-  //                     const Icon(
-  //                       EvaIcons.calendarOutline,
-  //                       size: 22.0,
-  //                       color: Colors.white,
-  //                     ),
-  //                     const SizedBox(width: kSpacing / 2),
-  //                     Text(
-  //                       DateFormat('EEE,d MMM yyyy').format(DateTime.now()),
-  //                       style: const TextStyle(
-  //                         fontSize: 16.0,
-  //                         color: Colors.white,
-  //                         letterSpacing: 3.0,
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ],
-  //             ),
-  //             AnimatedNumberText(
-  //               pocketController.merchantInfo.value.walletBalance ?? 0, // int or double
-  //               curve: Curves.easeIn,
-  //               duration: const Duration(seconds: 1),
-  //               style: const TextStyle(
-  //                 fontSize: 26.0,
-  //                 color: Color(0xFF5271FF),
-  //                 fontWeight: FontWeight.bold,
-  //                 letterSpacing: 5.0,
-  //               ),
-  //               formatter: (value) {
-  //                 final formatted = NumberFormatService.currencyCoin('$value');
-  //                 return formatted;
-  //               },
-  //             ),
-  //             const Text(
-  //               'BU Point',
-  //               style: TextStyle(
-  //                 fontSize: 18.0,
-  //                 color: Colors.white,
-  //                 fontWeight: FontWeight.bold,
-  //                 letterSpacing: 2.0,
-  //               ),
-  //             )
-  //           ],
-  //         );
-  //       } else {
-  //         return Column(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: <Widget>[
-  //             Text(
-  //               totalBalance.tr,
-  //               style: const TextStyle(
-  //                 fontSize: 22.0,
-  //                 color: Colors.white,
-  //                 letterSpacing: 3.0,
-  //               ),
-  //             ),
-  //             const SizedBox(height: kSpacing / 2),
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //               crossAxisAlignment: CrossAxisAlignment.center,
-  //               children: <Widget>[
-  //                 AnimatedNumberText(
-  //                   pocketController.merchantInfo.value.walletBalance ?? 0, // int or double
-  //                   curve: Curves.easeIn,
-  //                   duration: const Duration(seconds: 1),
-  //                   style: const TextStyle(
-  //                     fontSize: 32.0,
-  //                     color: Color(0xFF5271FF),
-  //                     fontWeight: FontWeight.bold,
-  //                     letterSpacing: 5.0,
-  //                   ),
-  //                   formatter: (value) {
-  //                     final formatted = NumberFormatService.currencyCoin('$value');
-  //                     return formatted;
-  //                   },
-  //                 ),
-  //                 const Text(
-  //                   'BU Point',
-  //                   style: TextStyle(
-  //                     fontSize: 18.0,
-  //                     color: Colors.white,
-  //                     fontWeight: FontWeight.bold,
-  //                     letterSpacing: 2.0,
-  //                   ),
-  //                 )
-  //               ],
-  //             ),
-  //             const SizedBox(height: 5.0),
-  //             Row(
-  //               children: <Widget>[
-  //                 const Icon(
-  //                   EvaIcons.calendarOutline,
-  //                   size: 24.0,
-  //                   color: Colors.white,
-  //                 ),
-  //                 const SizedBox(width: kSpacing / 2),
-  //                 Text(
-  //                   DateFormat('EEEE,d MMM yyyy').format(DateTime.now()),
-  //                   style: const TextStyle(
-  //                     fontSize: 18.0,
-  //                     color: Colors.white,
-  //                     letterSpacing: 3.0,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ],
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
 
   Widget buildBalanceSummary() {
     final isMobile = ResponsiveBuilder.isMobile(context);

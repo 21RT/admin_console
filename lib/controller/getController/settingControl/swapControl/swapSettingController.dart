@@ -83,4 +83,9 @@ class SwapSettingController extends GetxController {
 
     update();
   }
+
+  void updateFee(){
+    print(showCoin);
+    // will be call API function ASAP
+  }
 }
