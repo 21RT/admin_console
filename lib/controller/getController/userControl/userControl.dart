@@ -12,7 +12,7 @@ class UserController extends GetxController {
   RxList<Map<String, dynamic>> dataList = <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> rawData = <Map<String, dynamic>>[].obs;
 
-  Future<void> getDataUser() async {
+  Future<void> getDataUser(email) async {
     try {
 
       Map dataReq = {

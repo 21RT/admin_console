@@ -1,0 +1,64 @@
+2023/10/26-13:13:41.246 a303 Creating DB /private/var/folders/mh/nyz5802s4rzcrjrtb__64v3m0000gn/T/flutter_tools.9ENKon/flutter_tools_chrome_device.iAdOEg/Default/IndexedDB/http_localhost_64001.indexeddb.leveldb since it was missing.
+2023/10/26-13:13:41.261 a303 Reusing MANIFEST /private/var/folders/mh/nyz5802s4rzcrjrtb__64v3m0000gn/T/flutter_tools.9ENKon/flutter_tools_chrome_device.iAdOEg/Default/IndexedDB/http_localhost_64001.indexeddb.leveldb/MANIFEST-000001
+2023/10/26-13:13:41.289 b203 Level-0 table #5: started
+2023/10/26-13:13:41.294 b203 Level-0 table #5: 1310 bytes OK
+2023/10/26-13:13:41.303 b203 Delete type=0 #3
+2023/10/26-13:13:41.303 a303 Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/26-13:16:29.033 b203 Level-0 table #7: started
+2023/10/26-13:16:29.050 b203 Level-0 table #7: 1886 bytes OK
+2023/10/26-13:16:29.062 b203 Delete type=0 #4
+2023/10/26-13:16:29.062 a603 Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/26-13:16:40.979 b203 Level-0 table #9: started
+2023/10/26-13:16:41.003 b203 Level-0 table #9: 944 bytes OK
+2023/10/26-13:16:41.011 b203 Delete type=0 #6
+2023/10/26-13:16:41.012 a603 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x00\x00\x05' @ 165 : 1
+2023/10/26-13:16:41.012 a603 Compacting 1@0 + 1@1 files
+2023/10/26-13:16:41.017 a603 Generated table #10@0: 56 keys, 1486 bytes
+2023/10/26-13:16:41.017 a603 Compacted 1@0 + 1@1 files => 1486 bytes
+2023/10/26-13:16:41.024 a603 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/26-13:16:41.025 a603 Delete type=2 #9
+2023/10/26-13:16:41.025 a603 Manual compaction at level-0 from '\x00\x05\x00\x00\x05' @ 165 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/26-13:22:00.546 b203 Level-0 table #12: started
+2023/10/26-13:22:00.552 b203 Level-0 table #12: 944 bytes OK
+2023/10/26-13:22:00.566 b203 Delete type=2 #7
+2023/10/26-13:22:00.566 b203 Delete type=0 #8
+2023/10/26-13:22:00.566 a603 Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x00\x00\x05' @ 198 : 1
+2023/10/26-13:22:00.566 a603 Compacting 1@0 + 1@1 files
+2023/10/26-13:22:00.571 a603 Generated table #13@0: 64 keys, 1534 bytes
+2023/10/26-13:22:00.571 a603 Compacted 1@0 + 1@1 files => 1534 bytes
+2023/10/26-13:22:00.578 a603 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/26-13:22:00.579 a603 Delete type=2 #12
+2023/10/26-13:22:00.579 a603 Manual compaction at level-0 from '\x00\x06\x00\x00\x05' @ 198 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/26-13:22:52.848 b203 Level-0 table #15: started
+2023/10/26-13:22:52.863 b203 Level-0 table #15: 947 bytes OK
+2023/10/26-13:22:52.874 b203 Delete type=0 #11
+2023/10/26-13:22:52.874 b203 Delete type=2 #10
+2023/10/26-13:22:52.874 a603 Manual compaction at level-0 from '\x00\x07\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at '\x00\x07\x00\x00\x05' @ 231 : 1
+2023/10/26-13:22:52.874 a603 Compacting 1@0 + 1@1 files
+2023/10/26-13:22:52.880 a603 Generated table #16@0: 72 keys, 1627 bytes
+2023/10/26-13:22:52.880 a603 Compacted 1@0 + 1@1 files => 1627 bytes
+2023/10/26-13:22:52.886 a603 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/26-13:22:52.887 a603 Delete type=2 #15
+2023/10/26-13:22:52.887 a603 Manual compaction at level-0 from '\x00\x07\x00\x00\x05' @ 231 : 1 .. '\x00\x08\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/26-13:23:12.027 b203 Level-0 table #18: started
+2023/10/26-13:23:12.048 b203 Level-0 table #18: 942 bytes OK
+2023/10/26-13:23:12.056 b203 Delete type=0 #14
+2023/10/26-13:23:12.056 b203 Delete type=2 #13
+2023/10/26-13:23:12.056 a303 Manual compaction at level-0 from '\x00\x08\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at '\x00\x08\x00\x00\x05' @ 264 : 1
+2023/10/26-13:23:12.056 a303 Compacting 1@0 + 1@1 files
+2023/10/26-13:23:12.060 a303 Generated table #19@0: 80 keys, 1691 bytes
+2023/10/26-13:23:12.060 a303 Compacted 1@0 + 1@1 files => 1691 bytes
+2023/10/26-13:23:12.067 a303 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/26-13:23:12.067 a303 Delete type=2 #18
+2023/10/26-13:23:12.068 a303 Manual compaction at level-0 from '\x00\x08\x00\x00\x05' @ 264 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at (end)
+2023/10/26-13:23:31.458 b203 Level-0 table #21: started
+2023/10/26-13:23:31.487 b203 Level-0 table #21: 941 bytes OK
+2023/10/26-13:23:31.499 b203 Delete type=0 #17
+2023/10/26-13:23:31.499 b203 Delete type=2 #16
+2023/10/26-13:23:31.503 b203 Manual compaction at level-0 from '\x00\x09\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0a\x00\x00\x00' @ 0 : 0; will stop at '\x00\x09\x00\x00\x05' @ 297 : 1
+2023/10/26-13:23:31.503 b203 Compacting 1@0 + 1@1 files
+2023/10/26-13:23:31.508 b203 Generated table #22@0: 88 keys, 1794 bytes
+2023/10/26-13:23:31.508 b203 Compacted 1@0 + 1@1 files => 1794 bytes
+2023/10/26-13:23:31.515 b203 compacted to: files[ 0 1 1 0 0 0 0 ]
+2023/10/26-13:23:31.515 b203 Delete type=2 #21
+2023/10/26-13:23:31.515 a603 Manual compaction at level-0 from '\x00\x09\x00\x00\x05' @ 297 : 1 .. '\x00\x0a\x00\x00\x00' @ 0 : 0; will stop at (end)

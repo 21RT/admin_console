@@ -315,363 +315,360 @@ class _LoginScreenState extends State<SignInScreen> {
     final isMobile = ResponsiveBuilder.isMobile(context);
     return GetBuilder<SignInController>(
       init: SignInController(),
-      builder: (signInController) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment:
-              isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                if (isDesktop)
-                  const SizedBox()
-                else
-                  const Text('ADMIN CONSOLE',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Color(0xFF5271FF),
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 5.0,
-                      )),
-                  // Image.asset(
-                  //   ImageRasterPath.logoMerchantAdmin2,
-                  //   height: 60.0,
-                  // ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    buildSetLanguage(),
-                    // if (!isMobile)
-                    //   Row(
-                    //     children: [
-                    //       const SizedBox(width: kSpacing),
-                    //       InkWell(
-                    //         splashColor: Colors.transparent,
-                    //         focusColor: Colors.transparent,
-                    //         hoverColor: Colors.transparent,
-                    //         highlightColor: Colors.transparent,
-                    //         onTap: () async {
-                    //           if (await canLaunchUrlString('https://likepoint.io/privacy-policys')) {
-                    //             await launchUrlString('https://likepoint.io/privacy-policy');
-                    //           } else {
-                    //             throw 'Could not launch https://likepoint.io/privacy-policy';
-                    //           }
-                    //         },
-                    //         child: Text(
-                    //           policy.tr,
-                    //           style: const TextStyle(
-                    //             fontSize: 14.0,
-                    //             color: kFontColor,
-                    //             letterSpacing: .6,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       const SizedBox(width: kSpacing),
-                    //       InkWell(
-                    //         splashColor: Colors.transparent,
-                    //         focusColor: Colors.transparent,
-                    //         hoverColor: Colors.transparent,
-                    //         highlightColor: Colors.transparent,
-                    //         onTap: () async {
-                    //           if (await canLaunchUrlString('https://likepoint.io/terms-and-conditions')) {
-                    //             await launchUrlString('https://likepoint.io/terms-and-conditions');
-                    //           } else {
-                    //             throw 'Could not launch https://likepoint.io/terms-and-conditions';
-                    //           }
-                    //         },
-                    //         child: Text(
-                    //           terms.tr,
-                    //           style: const TextStyle(
-                    //             fontSize: 14.0,
-                    //             color: kFontColor,
-                    //             letterSpacing: .6,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
+      builder: (signInController) => Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment:
+        isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              if (isDesktop)
+                const SizedBox()
+              else
+                const Text('ADMIN CONSOLE',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Color(0xFF5271FF),
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 5.0,
+                    )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  buildSetLanguage(),
+                  // if (!isMobile)
+                  //   Row(
+                  //     children: [
+                  //       const SizedBox(width: kSpacing),
+                  //       InkWell(
+                  //         splashColor: Colors.transparent,
+                  //         focusColor: Colors.transparent,
+                  //         hoverColor: Colors.transparent,
+                  //         highlightColor: Colors.transparent,
+                  //         onTap: () async {
+                  //           if (await canLaunchUrlString('https://likepoint.io/privacy-policys')) {
+                  //             await launchUrlString('https://likepoint.io/privacy-policy');
+                  //           } else {
+                  //             throw 'Could not launch https://likepoint.io/privacy-policy';
+                  //           }
+                  //         },
+                  //         child: Text(
+                  //           policy.tr,
+                  //           style: const TextStyle(
+                  //             fontSize: 14.0,
+                  //             color: kFontColor,
+                  //             letterSpacing: .6,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       const SizedBox(width: kSpacing),
+                  //       InkWell(
+                  //         splashColor: Colors.transparent,
+                  //         focusColor: Colors.transparent,
+                  //         hoverColor: Colors.transparent,
+                  //         highlightColor: Colors.transparent,
+                  //         onTap: () async {
+                  //           if (await canLaunchUrlString('https://likepoint.io/terms-and-conditions')) {
+                  //             await launchUrlString('https://likepoint.io/terms-and-conditions');
+                  //           } else {
+                  //             throw 'Could not launch https://likepoint.io/terms-and-conditions';
+                  //           }
+                  //         },
+                  //         child: Text(
+                  //           terms.tr,
+                  //           style: const TextStyle(
+                  //             fontSize: 14.0,
+                  //             color: kFontColor,
+                  //             letterSpacing: .6,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: isDesktop
+                ? CrossAxisAlignment.start
+                : CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                welcomeBack.tr,
+                style: TextStyle(
+                  fontSize: isDesktop ? 42.0 : 32.0,
+                  color: kFontColor,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: .6,
+                ),
+              ),
+              Text(
+                signSubtext.tr,
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.grey[600],
+                  letterSpacing: .6,
+                ),
+              )
+            ],
+          ),
+          /// Email Login
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: <Widget>[
+          //     Text(
+          //       email.tr,
+          //       style: const TextStyle(
+          //         fontSize: 18.0,
+          //         color: kFontColor,
+          //         fontWeight: FontWeight.bold,
+          //         letterSpacing: .6,
+          //       ),
+          //     ),
+          //     const SizedBox(height: kSpacing / 2),
+          //     TextField(
+          //       controller: _emailLogin,
+          //       autofocus: false,
+          //       style: const TextStyle(
+          //         fontSize: 18.0,
+          //         color: kFontColor,
+          //         letterSpacing: .6,
+          //       ),
+          //       cursorHeight: 18.0,
+          //       cursorColor: Colors.grey,
+          //       keyboardType: TextInputType.emailAddress,
+          //       decoration: InputDecoration(
+          //         isCollapsed: true,
+          //         fillColor: Colors.white,
+          //         filled: true,
+          //         contentPadding: const EdgeInsets.symmetric(
+          //           horizontal: kSpacing,
+          //           vertical: 15.0,
+          //         ),
+          //         enabledBorder: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(kSpacing),
+          //           borderSide:
+          //               BorderSide(width: 1.4, color: Colors.grey.shade400),
+          //         ),
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(kSpacing),
+          //           borderSide:
+          //               BorderSide(width: 1.4, color: Colors.grey.shade400),
+          //         ),
+          //         focusedBorder: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(kSpacing),
+          //           borderSide:
+          //               BorderSide(width: 1.4, color: Colors.grey.shade400),
+          //         ),
+          //         hintText: enterEmail.tr,
+          //         hintStyle: const TextStyle(
+          //           fontSize: 18.0,
+          //           color: Colors.grey,
+          //           letterSpacing: .6,
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(height: kSpacing * 2),
+          //     Text(
+          //       password.tr,
+          //       style: const TextStyle(
+          //         fontSize: 18.0,
+          //         color: kFontColor,
+          //         fontWeight: FontWeight.bold,
+          //         letterSpacing: .6,
+          //       ),
+          //     ),
+          //     const SizedBox(height: kSpacing / 2),
+          //     TextField(
+          //       controller: _passwordLogin,
+          //       autofocus: false,
+          //       style: const TextStyle(
+          //         fontSize: 18.0,
+          //         color: kFontColor,
+          //         letterSpacing: .6,
+          //       ),
+          //       cursorHeight: 18.0,
+          //       cursorColor: Colors.grey,
+          //       keyboardType: TextInputType.text,
+          //       decoration: InputDecoration(
+          //         isCollapsed: true,
+          //         fillColor: Colors.white,
+          //         filled: true,
+          //         contentPadding: const EdgeInsets.symmetric(
+          //           horizontal: kSpacing,
+          //           vertical: 15.0,
+          //         ),
+          //         enabledBorder: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(kSpacing),
+          //           borderSide:
+          //               BorderSide(width: 1.4, color: Colors.grey.shade400),
+          //         ),
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(kSpacing),
+          //           borderSide:
+          //               BorderSide(width: 1.4, color: Colors.grey.shade400),
+          //         ),
+          //         focusedBorder: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(kSpacing),
+          //           borderSide:
+          //               BorderSide(width: 1.4, color: Colors.grey.shade400),
+          //         ),
+          //         suffixIcon: IconButton(
+          //           padding: const EdgeInsets.only(right: kSpacing / 2),
+          //           hoverColor: Colors.transparent,
+          //           onPressed: () => signInController.setIsObscureLogin(
+          //               value: !signInController.isObscureLogin.value),
+          //           icon: Icon(
+          //             signInController.isObscureLogin.value
+          //                 ? Icons.visibility_off
+          //                 : Icons.visibility,
+          //             size: 18.0,
+          //             color: Colors.grey[600],
+          //           ),
+          //         ),
+          //         hintText: enterPassword.tr,
+          //         hintStyle: const TextStyle(
+          //           fontSize: 18.0,
+          //           color: Colors.grey,
+          //           letterSpacing: .6,
+          //         ),
+          //       ),
+          //       obscureText: signInController.isObscureLogin.value,
+          //       // obscureText: _isObscure,
+          //     ),
+          //     const SizedBox(height: kSpacing),
+          //     Align(
+          //       alignment: Alignment.centerRight,
+          //       child: InkWell(
+          //         splashColor: Colors.transparent,
+          //         focusColor: Colors.transparent,
+          //         hoverColor: Colors.transparent,
+          //         highlightColor: Colors.transparent,
+          //         // onTap: () => Get.toNamed('/reset_password'),
+          //         child: Text(
+          //           forgotPassword.tr,
+          //           style: TextStyle(
+          //             fontSize: 16.0,
+          //             // color: Color(0xFF5271FF),
+          //             color: Colors.grey.shade400,
+          //             fontWeight: FontWeight.bold,
+          //             letterSpacing: .6,
+          //           ),
+          //         ),
+          //       ),
+          //     )
+          //   ],
+          // ),
+          // Column(
+          //   children: <Widget>[
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         // loginWithEmail();
+          //         // loginMerchant();
+          //         signInController.loginEmail(_emailLogin.text, _passwordLogin.text);
+          //       },
+          //       style: ElevatedButton.styleFrom(
+          //         foregroundColor: Colors.white,
+          //         backgroundColor: kFontColor,
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(kBorderRadius),
+          //         ),
+          //       ),
+          //       child: Center(
+          //         child: Padding(
+          //           padding: const EdgeInsets.all(kSpacing / 2),
+          //           child: Text(
+          //             signIn.tr,
+          //             style: const TextStyle(
+          //               fontSize: 18.0,
+          //               color: Colors.white,
+          //               fontWeight: FontWeight.bold,
+          //               letterSpacing: .6,
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(height: kSpacing * 2),
+          //     // Row(
+          //     //   mainAxisAlignment: MainAxisAlignment.center,
+          //     //   children: <Widget>[
+          //     //     Text(
+          //     //       donHaveAccount.tr,
+          //     //       style: const TextStyle(
+          //     //         fontSize: 18.0,
+          //     //         color: kFontColor,
+          //     //         letterSpacing: 1.4,
+          //     //       ),
+          //     //     ),
+          //     //     const SizedBox(width: kSpacing / 2),
+          //     //     InkWell(
+          //     //       splashColor: Colors.transparent,
+          //     //       focusColor: Colors.transparent,
+          //     //       hoverColor: Colors.transparent,
+          //     //       highlightColor: Colors.transparent,
+          //     //       onTap: () => signInController.setPageIndex(index: 1),
+          //     //       child: Text(
+          //     //         signUp.tr,
+          //     //         style: const TextStyle(
+          //     //           fontSize: 18.0,
+          //     //           color: kFontColor,
+          //     //           fontWeight: FontWeight.bold,
+          //     //           letterSpacing: 1.4,
+          //     //         ),
+          //     //       ),
+          //     //     ),
+          //     //   ],
+          //     // ),
+          //   ],
+          // ),
+          /// login with google
+          Center(
+            child: InkWell(
+              onTap: () {
+                _signInWithGoogle(context);
+                print("Sign in with google");
+              },
+              child: Container(
+                width: isDesktop ? MediaQuery.of(context).size.width * 0.15: MediaQuery.of(context).size.width * 0.5,
+                // height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
                   ],
                 ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: isDesktop
-                  ? CrossAxisAlignment.start
-                  : CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  welcomeBack.tr,
-                  style: TextStyle(
-                    fontSize: isDesktop ? 42.0 : 32.0,
-                    color: kFontColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: .6,
-                  ),
-                ),
-                Text(
-                  signSubtext.tr,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.grey[600],
-                    letterSpacing: .6,
-                  ),
-                )
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  email.tr,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    color: kFontColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: .6,
-                  ),
-                ),
-                const SizedBox(height: kSpacing / 2),
-                TextField(
-                  controller: _emailLogin,
-                  autofocus: false,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    color: kFontColor,
-                    letterSpacing: .6,
-                  ),
-                  cursorHeight: 18.0,
-                  cursorColor: Colors.grey,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: kSpacing,
-                      vertical: 15.0,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kSpacing),
-                      borderSide:
-                          BorderSide(width: 1.4, color: Colors.grey.shade400),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kSpacing),
-                      borderSide:
-                          BorderSide(width: 1.4, color: Colors.grey.shade400),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kSpacing),
-                      borderSide:
-                          BorderSide(width: 1.4, color: Colors.grey.shade400),
-                    ),
-                    hintText: enterEmail.tr,
-                    hintStyle: const TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.grey,
-                      letterSpacing: .6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: kSpacing * 2),
-                Text(
-                  password.tr,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    color: kFontColor,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: .6,
-                  ),
-                ),
-                const SizedBox(height: kSpacing / 2),
-                TextField(
-                  controller: _passwordLogin,
-                  autofocus: false,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    color: kFontColor,
-                    letterSpacing: .6,
-                  ),
-                  cursorHeight: 18.0,
-                  cursorColor: Colors.grey,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: kSpacing,
-                      vertical: 15.0,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kSpacing),
-                      borderSide:
-                          BorderSide(width: 1.4, color: Colors.grey.shade400),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kSpacing),
-                      borderSide:
-                          BorderSide(width: 1.4, color: Colors.grey.shade400),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kSpacing),
-                      borderSide:
-                          BorderSide(width: 1.4, color: Colors.grey.shade400),
-                    ),
-                    suffixIcon: IconButton(
-                      padding: const EdgeInsets.only(right: kSpacing / 2),
-                      hoverColor: Colors.transparent,
-                      onPressed: () => signInController.setIsObscureLogin(
-                          value: !signInController.isObscureLogin.value),
-                      icon: Icon(
-                        signInController.isObscureLogin.value
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        size: 18.0,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    hintText: enterPassword.tr,
-                    hintStyle: const TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.grey,
-                      letterSpacing: .6,
-                    ),
-                  ),
-                  obscureText: signInController.isObscureLogin.value,
-                  // obscureText: _isObscure,
-                ),
-                const SizedBox(height: kSpacing),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    // onTap: () => Get.toNamed('/reset_password'),
-                    child: Text(
-                      forgotPassword.tr,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        // color: Color(0xFF5271FF),
-                        color: Colors.grey.shade400,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: .6,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    // loginWithEmail();
-                    // loginMerchant();
-                    signInController.loginEmail(_emailLogin.text, _passwordLogin.text);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: kFontColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(kBorderRadius),
-                    ),
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(kSpacing / 2),
-                      child: Text(
-                        signIn.tr,
-                        style: const TextStyle(
-                          fontSize: 18.0,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: .6,
                         ),
-                      ),
+                        child: Image.asset(ImageRasterPath.iconGoogle,scale: 2,)
                     ),
-                  ),
-                ),
-                const SizedBox(height: kSpacing * 2),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: <Widget>[
-                //     Text(
-                //       donHaveAccount.tr,
-                //       style: const TextStyle(
-                //         fontSize: 18.0,
-                //         color: kFontColor,
-                //         letterSpacing: 1.4,
-                //       ),
-                //     ),
-                //     const SizedBox(width: kSpacing / 2),
-                //     InkWell(
-                //       splashColor: Colors.transparent,
-                //       focusColor: Colors.transparent,
-                //       hoverColor: Colors.transparent,
-                //       highlightColor: Colors.transparent,
-                //       onTap: () => signInController.setPageIndex(index: 1),
-                //       child: Text(
-                //         signUp.tr,
-                //         style: const TextStyle(
-                //           fontSize: 18.0,
-                //           color: kFontColor,
-                //           fontWeight: FontWeight.bold,
-                //           letterSpacing: 1.4,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-              ],
-            ),
-            Center(
-              child: InkWell(
-                onTap: () {
-                  // _signInWithGoogle(context);
-                  print("Sign in with google");
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 5,
-                        offset: const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                          child: Image.asset(ImageRasterPath.iconGoogle,scale: 2,)
-                      ),
-                      Text("Sign in with google"),
-                    ],
-                  ),
+                    Text("Sign in with google"),
+                  ],
                 ),
               ),
             ),
-            const SizedBox()
-          ],
-        );
-      },
+          ),
+          const SizedBox()
+        ],
+      ),
     );
   }
 
@@ -1589,69 +1586,69 @@ class _LoginScreenState extends State<SignInScreen> {
   //   }
   // }
   //
-  // Future<void> _signInWithGoogle(BuildContext context) async {
-  //   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //   try {
-  //     final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn(
-  //       clientId: '915749193055-b85tn40gkjuqt8iolpifv8ho7sddi96c.apps.googleusercontent.com',
-  //       scopes: [
-  //         'email',
-  //         'https://www.googleapis.com/auth/contacts.readonly',
-  //       ],
-  //     ).signIn();
-  //     final GoogleSignInAuthentication? googleSignInAuthentication =
-  //     await googleSignInAccount?.authentication;
-  //     if (googleSignInAccount != null && googleSignInAuthentication != null) {
-  //       final AuthCredential credential = GoogleAuthProvider.credential(
-  //         accessToken: googleSignInAuthentication.accessToken,
-  //         idToken: googleSignInAuthentication.idToken,
-  //       );
-  //
-  //       // Show loader while processing
-  //       AppLoader.loader(context);
-  //
-  //       var data = await _auth.signInWithCredential(credential);
-  //
-  //       // Check if data.user is of type User before accessing properties
-  //       if (data.user is User) {
-  //         User user = data.user as User;
-  //
-  //         // Access properties like uid, displayName, email, etc.
-  //         var uid = user.uid;
-  //         var displayName = user.displayName;
-  //         var email = user.email;
-  //         var creationTime = user.metadata.creationTime.toString();
-  //         var lastSignInTime = user.metadata.lastSignInTime.toString();
-  //
-  //         Map<String, dynamic> userData = {
-  //           'UID': uid,
-  //           'name': displayName,
-  //           'email': email,
-  //           'create_time': creationTime,
-  //           'last_time': lastSignInTime,
-  //         };
-  //         // print(userData);
-  //         // var regis = Get.put(SignInController());
-  //         var regis = Get.find<SignInController>();
-  //         var userControl = Get.find<UserController>();
-  //
-  //         // Assuming register is a function that registers the user in your system
-  //         await regis.register(userData);
-  //         await userControl.getDataUser(email!);
-  //
-  //         // Navigate to the dashboard after successful registration
-  //         Get.offAllNamed('/dashboard');
-  //       } else {
-  //         // Handle the case when data.user is not a User object
-  //         print('Invalid data.user type: ${data.user.runtimeType}');
-  //       }
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     // Handle authentication exception
-  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       content: Text(e.message ?? 'An error occurred'),
-  //     ));
-  //   }
-  // }
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn(
+        clientId: '915749193055-b85tn40gkjuqt8iolpifv8ho7sddi96c.apps.googleusercontent.com',
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+      ).signIn();
+      final GoogleSignInAuthentication? googleSignInAuthentication =
+      await googleSignInAccount?.authentication;
+      if (googleSignInAccount != null && googleSignInAuthentication != null) {
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        // Show loader while processing
+        AppLoader.loader(context);
+
+        var data = await _auth.signInWithCredential(credential);
+
+        // Check if data.user is of type User before accessing properties
+        if (data.user is User) {
+          User user = data.user as User;
+
+          // Access properties like uid, displayName, email, etc.
+          var uid = user.uid;
+          var displayName = user.displayName;
+          var email = user.email;
+          var creationTime = user.metadata.creationTime.toString();
+          var lastSignInTime = user.metadata.lastSignInTime.toString();
+
+          Map<String, dynamic> userData = {
+            'UID': uid,
+            'name': displayName,
+            'email': email,
+            'create_time': creationTime,
+            'last_time': lastSignInTime,
+          };
+          // print(userData);
+          // var regis = Get.put(SignInController());
+          var regis = Get.find<SignInController>();
+          var userControl = Get.find<UserController>();
+
+          // Assuming register is a function that registers the user in your system
+          await regis.register(userData);
+          await userControl.getDataUser(email!);
+
+          // Navigate to the dashboard after successful registration
+          Get.offAllNamed('/dashboard');
+        } else {
+          // Handle the case when data.user is not a User object
+          print('Invalid data.user type: ${data.user.runtimeType}');
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      // Handle authentication exception
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.message ?? 'An error occurred'),
+      ));
+    }
+  }
 
 }
