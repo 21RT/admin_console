@@ -58,14 +58,14 @@ class _LoginScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Get.put(UserController()).getDataUser();
-          // Get.put(SignInController()).register();
-        },
-        child: const Icon(Icons.language),
-      ),
-      backgroundColor: Colors.white,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // Get.put(UserController()).getDataUser();
+      //     // Get.put(SignInController()).register();
+      //   },
+      //   child: const Icon(Icons.language),
+      // ),
+      // backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: buildContent(),
       ),

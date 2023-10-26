@@ -3,6 +3,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animated_text_lerp/animated_text_lerp.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -36,6 +37,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _scrollController = ScrollController();
 
   double padding = 0;
+  int numValue = 0;
+  int numValueYesterday = 0;
+  bool isCheck = false;
 
   List firstNames = [
     "Alice",
@@ -81,55 +85,38 @@ class _DashboardScreenState extends State<DashboardScreen> {
   TextEditingController coinController = TextEditingController();
   TextEditingController feeController = TextEditingController();
 
+  String countText = '';
+  TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     userController.getDataUser();
+    numValue = 80000000;
+    // numValueYesterday = numValue;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Get.put(UserController()).getDataUser();
-
-            if(padding == 30){
-              padding = 0;
-            } else {
-              padding = 30;
-            }
-
-            setState(() {});
-          },
-          backgroundColor: Colors.red,
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     // Get.put(UserController()).getDataUser();
+        //
+        //     if(padding == 30){
+        //       padding = 0;
+        //     } else {
+        //       padding = 30;
+        //     }
+        //
+        //     setState(() {});
+        //   },
+        //   backgroundColor: Colors.red,
+        // ),
         key: _scaffoldKey,
         backgroundColor: Colors.white,
         endDrawer: AdminDrawer(),
-        body:
-            // body: Container(
-            //   width: Get.width,
-            //   decoration: const BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage(ImageRasterPath.imageBg2),
-            //       repeat: ImageRepeat.repeat,
-            //       colorFilter: ColorFilter.mode(
-            //         Colors.white, // Overlay color
-            //         BlendMode.modulate, // Adjust blend mode as needed
-            //       ),
-            //     ),
-            //     gradient: LinearGradient(
-            //       begin: Alignment.topCenter,
-            //       end: Alignment.bottomCenter,
-            //       colors: <Color>[
-            //         Color(0xFF5271FF),
-            //         Color(0xFFA2A2FF),
-            //       ],
-            //     ),
-            //   ),
-            //   child:
-            Stack(
+        body: Stack(
           children: <Widget>[
             buildContent(),
             AppBarAdmin(scaffoldKey: _scaffoldKey),
@@ -1054,116 +1041,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Container(
-                                        height: 195.0,
-                                        width: Get.width * 0.45,
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: kSpacing * 1.5),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(.1),
-                                              blurRadius: 1.0,
-                                            )
-                                          ],
-                                          borderRadius: BorderRadius.circular(
-                                              kBorderRadius),
-                                        ),
-                                        child: Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 40.0),
-                                              child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: Container(
-                                                  height: 150,
-                                                  width: 150,
-                                                  // color: Colors.teal,
-                                                  child: Image.asset(
-                                                    ImageRasterPath.userIcon,
-                                                    color: Colors.black
-                                                        .withOpacity(0.2),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: Container(
-                                                    height: 20,
-                                                    width: 20,
-                                                    child: FaIcon(
-                                                      FontAwesomeIcons
-                                                          .arrowsRotate,
-                                                      color: Colors.black,
-                                                      size: 20,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Today's data",
-                                                  style: TextStyle(
-                                                      fontSize: 20.0,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Row(
-                                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: const [
-                                                        Text(
-                                                          'จำนวนผู้ใช้งานระบบ',
-                                                          style: TextStyle(
-                                                              fontSize: 20.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Text('20,000,000 บัญชี')
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.bottomRight,
-                                                  child: Text(
-                                                    "Yesterday's data 19,999,999 บัญชี",
-                                                    style: TextStyle(
-                                                        fontSize: 14.0,
-                                                        color: Colors.black),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            // child: buildTotalBalance(),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
                                           height: 195.0,
                                           width: Get.width * 0.45,
                                           padding: const EdgeInsets.symmetric(
@@ -1260,6 +1137,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               ),
                                             ],
                                           )),
+                                      Container(
+                                        height: 195.0,
+                                        width: Get.width * 0.45,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: kSpacing * 1.5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(.1),
+                                              blurRadius: 1.0,
+                                            )
+                                          ],
+                                          borderRadius: BorderRadius.circular(
+                                              kBorderRadius),
+                                        ),
+                                        // child:
+                                      ),
                                       const SizedBox(height: kSpacing * 1),
                                     ],
                                   ),
@@ -1286,21 +1182,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             // const SizedBox(height: kSpacing * 2),
                             /// ย้ายมาส่วนนี้
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                  height: 40,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          Colors.purpleAccent.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Center(
-                                      child: Text(
-                                    DateFormat('d MMMM yyyy HH:mm a')
-                                        .format(DateTime.now()),
-                                  ))),
-                            ),
                             const SizedBox(height: kSpacing * 2),
                             Container(
                               height: 800,
@@ -1319,430 +1200,387 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               width: Get.width,
                               alignment: Alignment.center,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 70.0,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: kSpacing / 2),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        const Text(
-                                          // 'Top high engagement',
-                                          'บัญชีผู้ใช้งาน',
-                                          style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: kFontColor,
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 1.4,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        Container(
-                                          height: 30,
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.black.withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Center(
-                                            child: DropdownButton<String>(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              underline: Container(),
-                                              value: selectedValue,
-                                              isExpanded: false,
-                                              onChanged: (String? newValue) {
-                                                if (newValue != null) {
-                                                  selectedValues.add(newValue);
-                                                  options.remove(newValue);
-                                                } else {
-                                                  selectedValues
-                                                      .remove(selectedValue);
-                                                }
-                                                isFirstTime = false;
-                                                setState(() {});
-                                              },
-                                              items:
-                                                  options.map((String value) {
-                                                return DropdownMenuItem<String>(
-                                                  value: value,
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
+                              child: GetBuilder<UserController>(
+                                init: UserController(),
+                                builder: (userController) => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 70.0,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: kSpacing / 2),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          const Text(
+                                            // 'Top high engagement',
+                                            'บัญชีผู้ใช้งาน',
+                                            style: TextStyle(
+                                              fontSize: 18.0,
+                                              color: kFontColor,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 1.4,
                                             ),
                                           ),
-                                        ),
-                                        // Container(
-                                        //   height: 40,
-                                        //   width: 40,
-                                        //   decoration: BoxDecoration(
-                                        //       color: Colors.black.withOpacity(0.1),
-                                        //      shape: BoxShape.circle
-                                        //   ),
-                                        //   child: Center(
-                                        //     child: FaIcon(
-                                        //       FontAwesomeIcons.arrowsRotate,
-                                        //       color: Colors.white,
-                                        //       size: 20,
-                                        //     ),
-                                        //   ),
-                                        // )
-                                        // Text(
-                                        //   '01/10/23-31/12/23',
-                                        //   style: TextStyle(
-                                        //     fontSize: 14.0,
-                                        //     color: Colors.grey[700],
-                                        //     letterSpacing: 1.4,
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: Colors.black,
-                                    thickness: 0.5,
-                                    indent: 0,
-                                    endIndent: 0,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Container(
-                                      width: Get.width * 2,
-                                      height: Get.height - 100,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              // buildHeadTable('SP', 100.0),
-                                              buildHeadTable('Name', 200.0),
-                                              buildHeadTable('E-mail', 300.0),
-                                              buildHeadTable(
-                                                  'Create Time', 200.0),
-                                              buildHeadTable('UID', 250.0),
-                                              buildHeadTable(
-                                                  'Last Time', 200.0),
-                                              for (int i = 0;
-                                                  i < selectedValues.length;
-                                                  i++)
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    GestureDetector(
-                                                        onTap: () {
-                                                          selectedValues.remove(
-                                                              selectedValue);
-                                                          options.insert(
-                                                              selectedValues
-                                                                  .indexOf(
-                                                                      selectedValue),
-                                                              selectedValue);
-                                                          setState(() {
-                                                            print("ปิด");
-                                                          });
-                                                        },
-                                                        child: Icon(
-                                                          Icons.close,
-                                                          size: 15,
-                                                        )),
-                                                    Text(
-                                                      selectedValues[i],
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black),
-                                                    ),
-                                                    S.H(10)
-                                                    // buildHeadTable(selectedValues[i], 200.0),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                          Divider(
-                                            color: Colors.black,
-                                            thickness: 0.5,
-                                            indent: 0,
-                                            endIndent: 0,
-                                          ),
                                           SizedBox(
-                                            height: 10,
+                                            width: 30,
                                           ),
                                           Container(
-                                            height: 500,
-                                            width: Get.width * 2,
-                                            // color: Colors.teal,
-                                            child: GetBuilder<UserController>(
-                                              init: UserController(),
-                                              builder: (userController) {
-                                                if (userController
-                                                    .dataList.isNotEmpty) {
-                                                  return ListView.builder(
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    // itemCount: 20,
-                                                    itemCount: userController
-                                                        .dataList.length,
-                                                    padding: EdgeInsets.all(10),
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      // Map<String, dynamic> userData = userController.dataList[index]['data'];
-                                                      return Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              SizedBox(
-                                                                  width: 200,
-                                                                  child: Text(
-                                                                      userController.dataList[index]['data']
-                                                                              [
-                                                                              'name'] ??
-                                                                          '')),
-                                                              SizedBox(
-                                                                  width: 300,
-                                                                  child: Text(userController
-                                                                              .dataList[index]
-                                                                          [
-                                                                          'data']
-                                                                      [
-                                                                      'email'])),
-                                                              SizedBox(
-                                                                width: 200,
-                                                                child: Text(
-                                                                    userController
-                                                                        .dataList[
-                                                                            index]
-                                                                            [
-                                                                            'data']
-                                                                            [
-                                                                            'create_time']
-                                                                        .toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
-                                                                    ),
-                                                              ),
-                                                              SizedBox(
-                                                                  width: 250,
-                                                                  child: Text(userController
-                                                                              .dataList[index]
-                                                                          [
-                                                                          'data']
-                                                                      ['UID'])),
-                                                              SizedBox(
-                                                                width: 200,
-                                                                child: Text(
-                                                                    userController
-                                                                        .dataList[
-                                                                            index]
-                                                                            [
-                                                                            'data']
-                                                                            [
-                                                                            'last_time']
-                                                                        .toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
-                                                                    ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Divider(
-                                                            color: Colors.grey,
-                                                            indent: 0,
-                                                            endIndent: 0,
-                                                          )
-                                                        ],
-                                                      );
-                                                    },
+                                            height: 30,
+                                            width: 200,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: Center(
+                                              child: DropdownButton<String>(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                underline: Container(),
+                                                value: selectedValue,
+                                                isExpanded: false,
+                                                onChanged: (String? newValue) {
+                                                  if (newValue != null) {
+                                                    selectedValues
+                                                        .add(newValue);
+                                                    options.remove(newValue);
+                                                  } else {
+                                                    selectedValues
+                                                        .remove(selectedValue);
+                                                  }
+                                                  isFirstTime = false;
+                                                  setState(() {});
+                                                },
+                                                items:
+                                                    options.map((String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: Text(value),
                                                   );
-                                                } else {
-                                                  return Text(
-                                                      'No data available'); // หรือใส่ข้อความที่ต้องการแสดง
-                                                }
-                                              },
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ),
+                                          // input search box
+                                          SizedBox(
+                                            width: 30,
+                                          ),
+                                          Container(
+                                            height: 30,
+                                            width: 200,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: Center(
+                                              child: TextFormField(
+                                                cursorHeight: 25,
+                                                cursorColor: Colors.black,
+                                                cursorRadius:
+                                                    Radius.circular(5),
+                                                controller: _searchController,
+                                                onChanged: (value) {
+                                                  if (value.length <
+                                                      countText.length) {
+                                                    userController.searchUser(
+                                                        value, isCheck);
+                                                  } else {
+                                                    if (value.length > 2) {
+                                                      userController.searchUser(
+                                                          value, isCheck);
+                                                    }
+                                                  }
+                                                  countText = value;
+                                                },
+                                                decoration: InputDecoration(
+                                                    icon: Icon(Icons.search),
+                                                    iconColor: Colors.black,
+                                                    border: InputBorder.none,
+                                                    hintText: 'Search'),
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                isCheck = !isCheck;
+                                              });
+                                              if (_searchController
+                                                      .text.length >
+                                                  0) {
+                                                userController.searchUser(
+                                                    _searchController.text,
+                                                    isCheck);
+                                              }
+                                            },
+                                            child: Container(
+                                              child: Row(
+                                                children: [
+                                                  Checkbox(
+                                                    value: isCheck,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        isCheck = value!;
+                                                      });
+                                                      if (_searchController
+                                                              .text.length >
+                                                          0) {
+                                                        userController
+                                                            .searchUser(
+                                                                _searchController
+                                                                    .text,
+                                                                isCheck);
+                                                      }
+                                                    },
+                                                  ),
+                                                  Text('reverse searching')
+                                                ],
+                                              ),
                                             ),
                                           )
                                         ],
                                       ),
                                     ),
-                                  ),
-                                  Spacer(),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color:
-                                                Colors.black.withOpacity(0.2)),
-                                        child: Center(
-                                            child: FaIcon(
-                                          FontAwesomeIcons.anglesLeft,
-                                          size: 15,
-                                          color: Colors.white,
-                                        )),
+                                    Divider(
+                                      color: Colors.black,
+                                      thickness: 0.5,
+                                      indent: 0,
+                                      endIndent: 0,
+                                    ),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Container(
+                                        width: Get.width * 2,
+                                        height: Get.height - 120,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                // buildHeadTable('SP', 100.0),
+                                                buildHeadTable('Name', 200.0),
+                                                buildHeadTable('E-mail', 300.0),
+                                                buildHeadTable(
+                                                    'Create Time', 200.0),
+                                                buildHeadTable('UID', 250.0),
+                                                buildHeadTable(
+                                                    'Last Time', 200.0),
+                                                for (int i = 0;
+                                                    i < selectedValues.length;
+                                                    i++)
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      GestureDetector(
+                                                          onTap: () {
+                                                            selectedValues.remove(
+                                                                selectedValue);
+                                                            options.insert(
+                                                                selectedValues
+                                                                    .indexOf(
+                                                                        selectedValue),
+                                                                selectedValue);
+                                                            setState(() {
+                                                              print("ปิด");
+                                                            });
+                                                          },
+                                                          child: Icon(
+                                                            Icons.close,
+                                                            size: 15,
+                                                          )),
+                                                      Text(
+                                                        selectedValues[i],
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      S.H(10)
+                                                      // buildHeadTable(selectedValues[i], 200.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            ),
+                                            Divider(
+                                              color: Colors.black,
+                                              thickness: 0.5,
+                                              indent: 0,
+                                              endIndent: 0,
+                                            ),
+                                            S.H(10.0),
+                                            Container(
+                                              height: 500,
+                                              width: Get.width * 2,
+                                              // color: Colors.teal,
+                                              child:
+                                                  userController
+                                                          .dataList.isNotEmpty
+                                                      ? ListView.builder(
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          // itemCount: 20,
+                                                          itemCount:
+                                                              userController
+                                                                  .dataList
+                                                                  .length,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10),
+                                                          itemBuilder:
+                                                              (context, index) {
+                                                            // Map<String, dynamic> userData = userController.dataList[index]['data'];
+                                                            return Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Row(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    SizedBox(
+                                                                        width:
+                                                                            200,
+                                                                        child: Text(userController.dataList[index]['data']['name'] ??
+                                                                            '')),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            300,
+                                                                        child: Text(userController.dataList[index]['data']
+                                                                            [
+                                                                            'email'])),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          200,
+                                                                      child: Text(
+                                                                          userController
+                                                                              .dataList[index]['data']['create_time']
+                                                                              .toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
+                                                                          ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            250,
+                                                                        child: Text(userController.dataList[index]['data']
+                                                                            [
+                                                                            'UID'])),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          200,
+                                                                      child: Text(
+                                                                          userController
+                                                                              .dataList[index]['data']['last_time']
+                                                                              .toString() // หรือข้อความอื่นที่คุณต้องการแสดงเมื่อไม่มีข้อมูล
+                                                                          ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Divider(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  indent: 0,
+                                                                  endIndent: 0,
+                                                                )
+                                                              ],
+                                                            );
+                                                          },
+                                                        )
+                                                      : Text(
+                                                          'No data available'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Container(
+                                    ),
+                                    Spacer(),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
                                           height: 30,
-                                          width: 100,
+                                          width: 30,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               color: Colors.black
                                                   .withOpacity(0.2)),
-                                          child: Padding(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: Text(
-                                              "หน้า ",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
+                                          child: Center(
+                                              child: FaIcon(
+                                            FontAwesomeIcons.anglesLeft,
+                                            size: 15,
+                                            color: Colors.white,
                                           )),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color:
-                                                Colors.black.withOpacity(0.2)),
-                                        child: Center(
-                                            child: FaIcon(
-                                          FontAwesomeIcons.anglesRight,
-                                          size: 15,
-                                          color: Colors.white,
-                                        )),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  // const SizedBox(height: kSpacing * 2),
-                                  // SingleChildScrollView(
-                                  //   padding: const EdgeInsets.symmetric(
-                                  //       horizontal: kSpacing / 2),
-                                  //   child: Column(
-                                  //     children: [
-                                  //       const SizedBox(height: kSpacing),
-                                  //       for (int i = 0; i < 100; i++)
-                                  //         Column(
-                                  //           children: [
-                                  //             Row(
-                                  //               children: <Widget>[
-                                  //                 Container(
-                                  //                   width: 50.0,
-                                  //                   alignment:
-                                  //                       Alignment.center,
-                                  //                   child: Text(
-                                  //                     '#${i + 1}',
-                                  //                     style: const TextStyle(
-                                  //                       fontSize: 16.0,
-                                  //                       color: kFontColor,
-                                  //                       fontWeight:
-                                  //                           FontWeight.bold,
-                                  //                       letterSpacing: 1.2,
-                                  //                     ),
-                                  //                   ),
-                                  //                 ),
-                                  //                 const SizedBox(
-                                  //                     width: kSpacing),
-                                  //                 Expanded(
-                                  //                   child: Row(
-                                  //                     children: <Widget>[
-                                  //                       CircleAvatar(
-                                  //                         radius: 24.0,
-                                  //                         child: SvgPicture
-                                  //                             .string(
-                                  //                           RandomAvatarString(
-                                  //                               (123 + i)
-                                  //                                   .toString()),
-                                  //                         ),
-                                  //                         // backgroundImage:SvgPicture.string(svgCode),
-                                  //                       ),
-                                  //                       const SizedBox(
-                                  //                           width: kSpacing),
-                                  //                       Text(
-                                  //                         '${firstNames[1]} ${lastNames[1]}',
-                                  //                         style:
-                                  //                             const TextStyle(
-                                  //                           fontSize: 16.0,
-                                  //                           color: kFontColor,
-                                  //                           letterSpacing:
-                                  //                               1.4,
-                                  //                         ),
-                                  //                       ),
-                                  //                     ],
-                                  //                   ),
-                                  //                 ),
-                                  //                 const SizedBox(
-                                  //                     width: kSpacing / 2),
-                                  //                 Container(
-                                  //                   width: 180.0,
-                                  //                   alignment:
-                                  //                       Alignment.centerRight,
-                                  //                   child: const Text(
-                                  //                     '234,701 BU Point ',
-                                  //                     style: TextStyle(
-                                  //                       fontSize: 14.0,
-                                  //                       color: kFontColor,
-                                  //                       fontWeight:
-                                  //                           FontWeight.bold,
-                                  //                       letterSpacing: 1.4,
-                                  //                     ),
-                                  //                   ),
-                                  //                 ),
-                                  //               ],
-                                  //             ),
-                                  //             Divider(
-                                  //               endIndent: kSpacing,
-                                  //               indent: kSpacing,
-                                  //               color: Colors.grey[200],
-                                  //               thickness: 1.0,
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                ],
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                            height: 30,
+                                            width: 100,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                color: Colors.black
+                                                    .withOpacity(0.2)),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5.0),
+                                              child: Text(
+                                                "หน้า ",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.black
+                                                  .withOpacity(0.2)),
+                                          child: Center(
+                                              child: FaIcon(
+                                            FontAwesomeIcons.anglesRight,
+                                            size: 15,
+                                            color: Colors.white,
+                                          )),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        )
+                                      ],
+                                    ),
+                                    S.H(kSpacing * 2),
+                                  ],
+                                ),
                               ),
                             ),
-                            const SizedBox(height: kSpacing * 2),
                           ],
                         ),
                       ),
@@ -1932,18 +1770,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: Column(
                   children: [
                     Container(
-                      width: 100,
-                      height: 100,
-                      // decoration: BoxDecoration(
-                      //   color: Colors.white.withOpacity(0.5),
-                      //   shape: BoxShape.circle
-                      // ),
-                      // color: swap.showCoin["code"] == 'BTC' ? Colors.blue :swap.showCoin["code"] == 'ETH' ?Colors.cyan :swap.showCoin["code"] == 'USDT' ?Colors.deepOrange :swap.showCoin["code"] == 'BTC2' ?Colors.green :swap.showCoin["code"] == 'ETH2' ?Colors.indigo :swap.showCoin["code"] == 'USDT2' ?Colors.pink :Colors.purple,
-                      child: Image.asset(
-                        swap.showCoin["icon"],
-                        width: 100,
-                        height: 100,
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage(swap.showCoin["icon"]),
+                          fit: BoxFit.cover,
+                        ),
+                        // borderRadius: BorderRadius.circular(20),
+                        // color: text== 'BTC' ? Color(0xFFa77030) :text== 'ETH' ?Color(0xFF2768ea) :text == 'USDT' ?Color(0xFF06759b) :text== 'USDC' ?Color(0xFF0566e8):text== 'EUROC' ?Color(0xFF016ace) :text== 'PAXG' ?Color(0xFFFFFFFF):text== 'BUSD' ?Color(0xFFf3ba2f):Colors.transparent,
+
+                        color: swap.showCoin["code"] == 'BTC'
+                            ? Color(0xFFa77030)
+                            : swap.showCoin["code"] == 'ETH'
+                                ? Color(0xFF2768ea)
+                                : swap.showCoin["code"] == 'USDT'
+                                    ? Color(0xFF06759b)
+                                    : swap.showCoin["code"] == 'USDC'
+                                        ? Color(0xFF0566e8)
+                                        : swap.showCoin["code"] == 'EUROC'
+                                            ? Color(0xFF016ace)
+                                            : swap.showCoin["code"] == 'PAXG'
+                                                ? Color(0xFFFFFFFF)
+                                                : swap.showCoin["code"] ==
+                                                        'BUSD'
+                                                    ? Color(0xFFf3ba2f)
+                                                    : Colors.transparent,
                       ),
+                      // child: Image.asset(
+                      //   swap.showCoin["icon"],
+                      //   width: 100,
+                      //   height: 100,
+                      // ),
                     ),
                     S.H(20),
                     Text(
@@ -1955,8 +1814,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       onTap: () {
                         showDialog(
                             context: context,
-                            builder: (context) =>
-                                showEdit(swap.showCoin["code"]));
+                            builder: (context) => showEdit(
+                                swap.showCoin["code"], swap.showCoin["icon"]));
                       },
                       child: Container(
                         height: 40,
@@ -1987,16 +1846,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           swap.changeArray(index);
                         },
                         child: AnimatedContainer(
-                          duration: Duration(milliseconds: 500+ index*100),
+                          duration: Duration(milliseconds: 500 + index * 100),
                           padding: EdgeInsets.only(left: padding),
-                            child: rowCoin(
-                                swap.swapSetting[index]["code"],
-                                swap.swapSetting[index]["currency"],
-                                swap.swapSetting[index]["icon"]
-                            ),
-                        )
-                        // rowCoin(swap.swapSetting[index]["code"], swap.swapSetting[index]["currency"],swap.swapSetting[index]["code"])),
-                        ),
+                          child: rowCoin(
+                              swap.swapSetting[index]["code"],
+                              swap.swapSetting[index]["currency"],
+                              swap.swapSetting[index]["icon"]),
+                        )),
                   ),
                 ),
               ),
@@ -2008,45 +1864,60 @@ class _DashboardScreenState extends State<DashboardScreen> {
   /// row for each coin 'ใส่รูปเหรียญ'
   Widget rowCoin(text, textCoin, icon) {
     // print(icon);
-    return Row(
-      children: [
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.5),
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage(icon.toString()),
-              fit: BoxFit.cover,
-            ),
+    return AnimationLimiter(
+        child: Column(
+      children: AnimationConfiguration.toStaggeredList(
+        duration: const Duration(milliseconds: 1000),
+        childAnimationBuilder: (widget) => SlideAnimation(
+          horizontalOffset: 50.0,
+          child: FadeInAnimation(
+            child: widget,
           ),
         ),
-        S.W(10),
-        Container(
-          // width: 40,
-          height: 50,
-          // alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Text(
-                text.toString(),
-                style: TextStyle(fontSize: 16, color: Colors.white),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: text== 'BTC' ? Color(0xFFa77030) :text== 'ETH' ?Color(0xFF2768ea) :text == 'USDT' ?Color(0xFF06759b) :text== 'USDC' ?Color(0xFF0566e8):text== 'EUROC' ?Color(0xFF016ace) :text== 'PAXG' ?Color(0xFFFFFFFF):text== 'BUSD' ?Color(0xFFf3ba2f):Colors.transparent,
+                  // borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: AssetImage(icon.toString()),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-              Text(
-                textCoin.toString(),
-                style: TextStyle(fontSize: 12, color: Colors.white),
+              S.W(10),
+              Container(
+                // width: 40,
+                height: 50,
+                // alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      text.toString(),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    Text(
+                      textCoin.toString(),
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ],
-          ),
-        ),
-      ],
-    );
+          )
+        ],
+      ),
+    ));
   }
 
-  Widget showEdit(textCoin) => Dialog(
+  Widget showEdit(textCoin, icon) => Dialog(
         backgroundColor: Colors.transparent,
         child: Container(
           height: 500,
@@ -2071,8 +1942,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           height: 100,
                           width: 100,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.purpleAccent.withOpacity(0.2),
+                            image: DecorationImage(
+                              image: AssetImage(icon),
+                              fit: BoxFit.cover,
+                            ),
+                            // shape: BoxShape.circle,
+                            // color: Colors.purpleAccent.withOpacity(0.2),
                           ),
                         ),
                         S.H(10),
@@ -2147,9 +2022,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     onChanged: (value) {
                       setState(() {
                         final valueCoin = Get.put(SwapSettingController());
-                        if(value == '' || value == null){
+                        if (value == '' || value == null) {
                           valueCoin.fee = 0;
-                        }else{
+                        } else {
                           valueCoin.fee = int.parse(value);
                         }
                         print(valueCoin.fee);
@@ -2158,13 +2033,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ),
                 S.H(10),
-                Divider(color: Colors.black,),
+                Divider(
+                  color: Colors.black,
+                ),
                 S.H(25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -2179,7 +2056,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -2201,59 +2078,119 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       );
 
-
   Widget buildSayHi() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        // Image.asset(
-        //   ImageRasterPath.imageBoy,
-        //   height: 160.0,
-        // ),
-        const SizedBox(width: kSpacing * 2),
-        Expanded(
-          child: Column(
+    return Container(
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                height: 150,
+                width: 150,
+                child: Image.asset(
+                  ImageRasterPath.userIcon,
+                  color: Colors.black.withOpacity(0.2),
+                ),
+              ),
+            ),
+          ),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AnimatedTextKit(
-                isRepeatingAnimation: false,
-                animatedTexts: <TypewriterAnimatedText>[
-                  TypewriterAnimatedText(
-                    sayHiFunction(name: 'Sumat'),
-                    speed: const Duration(milliseconds: 100),
-                    textStyle: const TextStyle(
-                      fontSize: 28.0,
-                      color: kFontColor,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.4,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    animatedTexts: <TypewriterAnimatedText>[
+                      TypewriterAnimatedText(
+                        sayHiFunction(name: 'Sumat'),
+                        speed: const Duration(milliseconds: 100),
+                        textStyle: const TextStyle(
+                          fontSize: 28.0,
+                          color: Color(0xFF8C52FF),
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.4,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          numValue += 456;
+                          numValueYesterday = numValue - 456;
+                        });
+                      },
+                      child: Container(
+                        height: 20,
+                        width: 20,
+                        child: FaIcon(
+                          FontAwesomeIcons.arrowsRotate,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: kSpacing),
               SizedBox(
-                height: 120.0,
-                child: AnimatedTextKit(
-                  pause: const Duration(milliseconds: 1000),
-                  totalRepeatCount: 5,
-                  isRepeatingAnimation: false,
-                  animatedTexts: <TypewriterAnimatedText>[
-                    TypewriterAnimatedText(
-                      '',
-                      speed: const Duration(milliseconds: 50),
-                      textStyle: const TextStyle(
-                        fontSize: 16.0,
-                        color: kFontColor,
-                        letterSpacing: 1.4,
-                      ),
+                  height:
+                      20.0), // Add space between the greeting and the "Today's data" section
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('จำนวนผู้ใช้งานระบบ',
+                        style: TextStyle(fontSize: 25.0)),
+                    S.H(10),
+                    Text("Today's data",
+                        style: TextStyle(fontSize: 20.0, color: Colors.green)),
+                    S.H(10),
+                    //numValue
+                    AnimatedNumberText(
+                      numValue, // int or double
+                      curve: Curves.easeIn,
+                      duration: const Duration(milliseconds: 100),
+                      style: TextStyle(fontSize: 14.0, color: Colors.black),
+                      formatter: (value) {
+                        final formatted = value.toString();
+                        final numFormat = NumberFormat("#,###", "en_US")
+                            .format(int.parse(formatted));
+                        final numAccount = '$numFormat บัญชี';
+                        return numAccount;
+                      },
                     ),
                   ],
                 ),
               ),
+              Spacer(),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: AnimatedNumberText(
+                  numValueYesterday, // int or double
+                  curve: Curves.easeIn,
+                  duration: const Duration(milliseconds: 100),
+                  style: TextStyle(fontSize: 14.0, color: Colors.black),
+                  formatter: (value) {
+                    final formatted = value.toString();
+                    final numFormat = NumberFormat("#,###", "en_US")
+                        .format(int.parse(formatted));
+                    final numAccount = "Yesterday's data $numFormat บัญชี";
+                    return numAccount;
+                  },
+                ),
+              ),
             ],
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 
@@ -2270,33 +2207,48 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget buildHeadText() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          dashboard.tr.toUpperCase(),
-          style: TextStyle(
-            fontSize: 28.0,
-            color: Colors.white,
-            shadows: [
-              Shadow(color: Colors.black.withOpacity(.1), blurRadius: 1.0)
-            ],
-            fontWeight: FontWeight.w700,
-            letterSpacing: .6,
-          ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              dashboard.tr.toUpperCase(),
+              style: TextStyle(
+                fontSize: 28.0,
+                color: Colors.white,
+                shadows: [
+                  Shadow(color: Colors.black.withOpacity(.1), blurRadius: 1.0)
+                ],
+                fontWeight: FontWeight.w700,
+                letterSpacing: .6,
+              ),
+            ),
+            Text(
+              dashboardSubText.tr,
+              style: TextStyle(
+                height: 1.4,
+                fontSize: 18.0,
+                color: Colors.white.withOpacity(.9),
+                shadows: [
+                  Shadow(color: Colors.black.withOpacity(.1), blurRadius: 1.0)
+                ],
+                letterSpacing: .6,
+              ),
+            ),
+          ],
         ),
-        Text(
-          dashboardSubText.tr,
-          style: TextStyle(
-            height: 1.4,
-            fontSize: 18.0,
-            color: Colors.white.withOpacity(.9),
-            shadows: [
-              Shadow(color: Colors.black.withOpacity(.1), blurRadius: 1.0)
-            ],
-            letterSpacing: .6,
-          ),
-        ),
+        Container(
+            height: 40,
+            width: 200,
+            decoration: BoxDecoration(
+                color: Color(0xFF8C52FF).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(10)),
+            child: Center(
+                child: Text(
+              DateFormat('d MMMM yyyy HH:mm a').format(DateTime.now()),
+            ))),
       ],
     );
   }

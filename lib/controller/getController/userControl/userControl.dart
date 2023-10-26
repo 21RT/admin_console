@@ -10,6 +10,7 @@ class UserController extends GetxController {
   }
 // ภายใน YourController
   RxList<Map<String, dynamic>> dataList = <Map<String, dynamic>>[].obs;
+  RxList<Map<String, dynamic>> rawData = <Map<String, dynamic>>[].obs;
 
   Future<void> getDataUser() async {
     try {
@@ -18,15 +19,16 @@ class UserController extends GetxController {
         'email':"jitrawadee.wanichphon.pkg@gmail.com"
       };
       print(dataReq);
-      var response = await HttpService.post('http://172.16.1.44:8000/getdata', dataReq);
+      var response = await HttpService.post('http://172.16.0.196:8000/getdata', dataReq);
       print({response});
       if (response != null && response is List) {
         // แปลงประเภทข้อมูลเป็น List<Map<String, dynamic>>
         List<Map<String, dynamic>> dataAsList = List<Map<String, dynamic>>.from(response);
         // กำหนดค่าให้กับ dataList
         dataList.assignAll(dataAsList);
+        rawData.assignAll(dataAsList);
         print(dataList.length);
-        // print('dataList: $dataList');
+        print('dataList: $dataList');
         // print('dataList[0]: ${dataList[0]['data']['name']}');
       } else {
         print('Response is null or not a List.');
@@ -35,4 +37,50 @@ class UserController extends GetxController {
       print(e);
     }
   }
+
+  void searchUser(String value, bool reverse) {
+    List<Map<String, dynamic>> filteredData;
+    // กรองข้อมูลใน dataList โดยใช้คำสั่ง where
+    // โดยจะเปรียบเทียบค่าใน key 'name' กับค่า value ที่รับเข้ามา
+    // ถ้ามีค่าใดมีค่าตรงกันก็จะถูกเก็บไว้ในตัวแปร filteredData
+
+    if(reverse){
+      // find as array output with false
+      print("reverse");
+      filteredData = rawData.where((data) => !data['data']['name'].toString().toLowerCase().contains(value.toLowerCase())).toList();
+      print(filteredData);
+
+      if(filteredData.length == rawData.length){
+        filteredData = rawData.where((data) => !data['data']['email'].toString().contains(value)).toList();
+      }
+      if(filteredData.length == rawData.length){
+        filteredData = rawData.where((data) => !data['data']['phone'].toString().contains(value)).toList();
+      }
+      if(filteredData.length == rawData.length){
+        filteredData = rawData.where((data) => !data['data']['UID'].toString().contains(value)).toList();
+      }
+      if(value.length == 0){
+        filteredData = rawData;
+      }
+    } else {
+      // find as array output
+      filteredData = rawData.where((data) => data['data']['name'].toString().toLowerCase().contains(value.toLowerCase())).toList();
+      if(filteredData.length == 0){
+        filteredData = rawData.where((data) => data['data']['email'].toString().contains(value)).toList();
+      }
+      if(filteredData.length == 0){
+        filteredData = rawData.where((data) => data['data']['phone'].toString().contains(value)).toList();
+      }
+      if(filteredData.length == 0){
+        filteredData = rawData.where((data) => data['data']['UID'].toString().contains(value)).toList();
+      }
+    }
+
+    print(filteredData);
+    // กำหนดค่าให้กับ dataList
+    dataList.assignAll(filteredData);
+    update();
+  }
+
+
 }

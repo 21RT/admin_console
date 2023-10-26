@@ -53,7 +53,7 @@ class IconPath {
   static const _folderPath = "assets/icon";
 
   static const iconBCT = "$_folderPath/bitcoin.png";
-  static const iconETH = "$_folderPath/ethereum.png";
+  static const iconETH = "$_folderPath/eth.png";
   static const iconUSDT = "$_folderPath/usdt.png";
   static const iconUSDC = "$_folderPath/usdc.png";
   static const iconPaxGold = "$_folderPath/pax-gold.png";
