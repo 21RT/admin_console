@@ -103,7 +103,7 @@ class SignInController extends GetxController {
     }
   }
 
-  register(Map<String, dynamic> userData) async {
+  signIn(Map<String, dynamic> userData) async {
     try {
       // Parse the string dates into DateTime objects
       DateTime createTime = DateTime.parse(userData['create_time']);
@@ -112,17 +112,17 @@ class SignInController extends GetxController {
       int secondsDifference = lastTime
           .difference(createTime)
           .inSeconds;
-      print(createTime);
-      print(lastTime);
-      print("อยู่ตรงนี้${secondsDifference.seconds}");
+      // print(createTime);
+      // print(lastTime);
+      // print("อยู่ตรงนี้${secondsDifference.seconds}");
       if(secondsDifference > 1) {
-        print("มากกว่า");
+        // print("มากกว่า");
         // print("อยู่ตรงนี้${secondsDifference}");
-        var response2 = await HttpService.post('http://172.16.0.196:8000/updateData', userData);
+        var response2 = await HttpService.post('http://172.16.0.160:8000/updateData', userData);
         print({response2});
       }else {
-        print("น้อยกว่า");
-        var response = await HttpService.post('http://172.16.0.196:8080/insertData', userData);
+        // print("น้อยกว่า");
+        var response = await HttpService.post('http://172.16.0.160:8080/insertData', userData);
       }
       // print({response});
     } catch (e) {

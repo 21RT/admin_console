@@ -12,31 +12,31 @@ class UserController extends GetxController {
   RxList<Map<String, dynamic>> dataList = <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> rawData = <Map<String, dynamic>>[].obs;
 
-  Future<void> getDataUser(email) async {
-    try {
-
-      Map dataReq = {
-        'email':"jitrawadee.wanichphon.pkg@gmail.com"
-      };
-      print(dataReq);
-      var response = await HttpService.post('http://172.16.0.196:8000/getdata', dataReq);
-      print({response});
-      if (response != null && response is List) {
-        // แปลงประเภทข้อมูลเป็น List<Map<String, dynamic>>
-        List<Map<String, dynamic>> dataAsList = List<Map<String, dynamic>>.from(response);
-        // กำหนดค่าให้กับ dataList
-        dataList.assignAll(dataAsList);
-        rawData.assignAll(dataAsList);
-        print(dataList.length);
-        print('dataList: $dataList');
-        // print('dataList[0]: ${dataList[0]['data']['name']}');
-      } else {
-        print('Response is null or not a List.');
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  // Future<void> getDataUser(email) async {
+  //   try {
+  //
+  //     Map dataReq = {
+  //       'email':"jitrawadee.wanichphon.pkg@gmail.com"
+  //     };
+  //     print(dataReq);
+  //     var response = await HttpService.post('http://172.16.0.160:8000/getdata', dataReq);
+  //     print({response});
+  //     if (response != null && response is List) {
+  //       // แปลงประเภทข้อมูลเป็น List<Map<String, dynamic>>
+  //       List<Map<String, dynamic>> dataAsList = List<Map<String, dynamic>>.from(response);
+  //       // กำหนดค่าให้กับ dataList
+  //       dataList.assignAll(dataAsList);
+  //       rawData.assignAll(dataAsList);
+  //       print(dataList.length);
+  //       print('dataList: $dataList');
+  //       // print('dataList[0]: ${dataList[0]['data']['name']}');
+  //     } else {
+  //       print('Response is null or not a List.');
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   void searchUser(String value, bool reverse) {
     List<Map<String, dynamic>> filteredData;

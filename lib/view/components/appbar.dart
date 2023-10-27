@@ -54,8 +54,8 @@ class _AppBarAdminState extends State<AppBarAdmin> {
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.teal),
                       ),
-                if (MediaQuery.of(context).size.width > 1080)
-                  Row(
+                MediaQuery.of(context).size.width > 1080
+                    ? Row(
                     children: [
                       const SizedBox(width: kSpacing),
                       const Text(
@@ -166,8 +166,7 @@ class _AppBarAdminState extends State<AppBarAdmin> {
                       )
                     ],
                   )
-                else
-                  GestureDetector(
+                    : GestureDetector(
                       onTap: () {
                         print("TEST");
                         widget.scaffoldKey.currentState?.openEndDrawer();
@@ -176,7 +175,8 @@ class _AppBarAdminState extends State<AppBarAdmin> {
                         Icons.menu,
                         size: 30,
                         color: Colors.black,
-                      )),
+                      )
+                  ),
               ],
             ),
           ),
