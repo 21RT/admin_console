@@ -2999,8 +2999,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       color: const Color(0xFF8C52FF).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
-                      child: Text(
-                    DateFormat('d MMMM yyyy HH:mm a').format(DateTime.now()),
+                      child: Text(DateFormat('d MMMM yyyy HH:mm a').format(DateTime.now()),
                   ))),
             ],
           )

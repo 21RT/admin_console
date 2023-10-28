@@ -3,7 +3,9 @@ import 'package:moneymaker/model/theme/app_constants.dart';
 
 class SwapSettingController extends GetxController {
   var swapSetting = [].obs;
+  var coinSwap = [].obs;
   var showCoin = {}.obs;
+  var showCoinSwap = {}.obs;
   bool breakLoading = true;
 
   int coinInsert = 0;
@@ -18,7 +20,6 @@ class SwapSettingController extends GetxController {
   void prepareInfo(){
     /// run only one time
     if(breakLoading){
-
       // mockup data
       var swapSettingList = [
         {
@@ -69,6 +70,57 @@ class SwapSettingController extends GetxController {
 
       for(int i = 1; i < swapSettingList.length; i++)
         swapSetting.add(swapSettingList[i]);
+
+
+      var coinSwapList = [
+        {
+          "code": "BUSD",
+          "currency": 60,
+          "decimalPoint": 6,
+          'icon': IconPath.iconBUSD,
+        },
+        {
+          "code": "PAXG",
+          "currency": 60,
+          "decimalPoint": 6,
+          'icon': IconPath.iconPaxGold,
+        },
+        {
+          "code": "EUROC",
+          "currency": 60,
+          "decimalPoint": 6,
+          'icon': IconPath.iconEuro,
+        },
+        {
+          "code": "USDC",
+          "currency": 0,
+          "decimalPoint": 6,
+          'icon': IconPath.iconUSDC,
+        },
+        {
+          "code": "USDT",
+          "currency": 60,
+          "decimalPoint": 6,
+          'icon': IconPath.iconUSDT,
+        },
+        {
+          "code": "ETH",
+          "currency": 60,
+          "decimalPoint": 6,
+          'icon': IconPath.iconETH,
+        },
+        {
+          "code": "BTC",
+          "currency": 0,
+          "decimalPoint": 6,
+          'icon': IconPath.iconBCT,
+        },
+      ];
+
+      showCoinSwap.value = coinSwapList[0];
+
+      for(int i = 1; i < coinSwapList.length; i++)
+        coinSwap.add(coinSwapList[i]);
 
       breakLoading = false;
       print(swapSetting);

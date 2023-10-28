@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:moneymaker/view/DashboardScreen.dart';
 import 'package:moneymaker/view/SignInScreen.dart';
+import 'package:moneymaker/view/setting/SettingScreen.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -80,10 +81,10 @@ class AppPages {
     //   binding: CampaignBinding(),
     //   page: () => const CreateRedeem(),
     // ),
-    // GetPage(
-    //   name: Paths.settings,
-    //   transition: Transition.noTransition,
-    //   // page: () => const SettingScreen(),
-    // ),
+    GetPage(
+      name: Paths.settings,
+      transition: Transition.noTransition,
+      page: () => const SettingScreen(),
+    ),
   ];
 }
