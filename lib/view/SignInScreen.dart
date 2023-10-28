@@ -742,6 +742,7 @@ class _LoginScreenState extends State<SignInScreen> {
         AppLoader.loader(context);
 
         var data = await _auth.signInWithCredential(credential);
+        Get.offAllNamed('/dashboard');
 
         // Check if data.user is of type User before accessing properties
         // if (data.user is User) {

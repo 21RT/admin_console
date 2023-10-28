@@ -58,19 +58,22 @@ class _AppBarAdminState extends State<AppBarAdmin> {
                     ? Row(
                     children: [
                       const SizedBox(width: kSpacing),
-                      const Text(
-                        "Dashboard",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                      _buildInkWell(route: '/dashboard', text: "DashBoard", status: isScroll),
+                      // const Text(
+                      //   "Dashboard",
+                      //   style: TextStyle(
+                      //       fontSize: 20, fontWeight: FontWeight.bold),
+                      // ),
                       const SizedBox(width: kSpacing * 1.5),
-                      const Text("Transaction",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      _buildInkWell(route: '/transaction', text: "Transaction", status: isScroll),
+                      // const Text("Transaction",
+                      //     style: TextStyle(
+                      //         fontSize: 20, fontWeight: FontWeight.bold)),
                       const SizedBox(width: kSpacing * 1.5),
-                      const Text('Setting',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      _buildInkWell(route: '/settings', text: "Setting", status: isScroll),
+                      // const Text('Setting',
+                      //     style: TextStyle(
+                      //         fontSize: 20, fontWeight: FontWeight.bold)),
                       const SizedBox(width: kSpacing * 1.5),
                       PopupMenuButton(
                         child: Container(
@@ -183,5 +186,36 @@ class _AppBarAdminState extends State<AppBarAdmin> {
         ],
       );
     });
+  }
+
+
+
+  Widget _buildInkWell({
+    required String route,
+    required String text,
+    required bool status,
+  }) {
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: route.isNotEmpty ? () => Get.offNamed(route) : null,
+      child: Text(
+        text,
+        maxLines: 1,
+        style: TextStyle(
+          shadows: [
+            Shadow(
+              color: Colors.black.withOpacity(.4),
+              blurRadius: 1.0,
+            ),
+          ],
+          fontSize: 18.0,
+          color: status ? kFontColor : Colors.white,
+          letterSpacing: .6,
+        ),
+      ),
+    );
   }
 }

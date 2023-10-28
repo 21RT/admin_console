@@ -16,4 +16,6 @@ class Paths {
   static const campaign = '/create_campaign';
   static const redeem = '/create_redeem';
   static const settings = '/settings';
+  static const transaction = '/transaction';
+
 }

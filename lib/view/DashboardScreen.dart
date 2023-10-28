@@ -2120,202 +2120,203 @@ class _DashboardScreenState extends State<DashboardScreen> {
   buildPointReport() {
     final isDesktop = ResponsiveBuilder.isDesktop(context);
     final isTablet = ResponsiveBuilder.isTablet(context);
-    return GetBuilder<SwapSettingController>(
-        init: SwapSettingController(),
-        builder: (swap) =>
-        // isDesktop&&isTablet
-        //     ?
-        Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: Get.height,
-                  width: 230,
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage(swap.showCoin["icon"]),
-                            fit: BoxFit.cover,
-                          ),
-                          // borderRadius: BorderRadius.circular(20),
-                          // color: text== 'BTC' ? Color(0xFFa77030) :text== 'ETH' ?Color(0xFF2768ea) :text == 'USDT' ?Color(0xFF06759b) :text== 'USDC' ?Color(0xFF0566e8):text== 'EUROC' ?Color(0xFF016ace) :text== 'PAXG' ?Color(0xFFFFFFFF):text== 'BUSD' ?Color(0xFFf3ba2f):Colors.transparent,
-
-                          color: swap.showCoin["code"] == 'BTC'
-                              ? const Color(0xFFa77030)
-                              : swap.showCoin["code"] == 'ETH'
-                                  ? const Color(0xFF2768ea)
-                                  : swap.showCoin["code"] == 'USDT'
-                                      ? const Color(0xFF06759b)
-                                      : swap.showCoin["code"] == 'USDC'
-                                          ? const Color(0xFF0566e8)
-                                          : swap.showCoin["code"] == 'EUROC'
-                                              ? const Color(0xFF016ace)
-                                              : swap.showCoin["code"] == 'PAXG'
-                                                  ? const Color(0xFFFFFFFF)
-                                                  : swap.showCoin["code"] ==
-                                                          'BUSD'
-                                                      ? const Color(0xFFf3ba2f)
-                                                      : Colors.transparent,
-                        ),
-                      ),
-                      S.H(20),
-                      Text(
-                        "1 USD ~ ${swap.showCoin['currency']} ${swap.showCoin["code"]}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      S.H(20),
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => showEdit(
-                                  swap.showCoin["code"],
-                                  swap.showCoin["icon"]));
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Text('EDIT'),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                // S.W(50),
-                Container(
-                  width: 300,
-                  height: 450,
-                  alignment: Alignment.topLeft,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                      swap.swapSetting.length,
-                      (index) => InkWell(
-                          onTap: () {
-                            swap.changeArray(index);
-                          },
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 500 + index * 100),
-                            padding: EdgeInsets.only(left: padding),
-                            child: rowCoin(
-                                swap.swapSetting[index]["code"],
-                                swap.swapSetting[index]["currency"],
-                                swap.swapSetting[index]["icon"]),
-                          )),
-                    ),
-                  ),
-                ),
-              ],
-            )
-        //     : Container(
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         children: [
-        //           Container(
-        //             width: 100,
-        //             height: 100,
-        //             decoration: BoxDecoration(
-        //               shape: BoxShape.circle,
-        //               image: DecorationImage(
-        //                 image: AssetImage(swap.showCoin["icon"]),
-        //                 fit: BoxFit.cover,
-        //               ),
-        //               // borderRadius: BorderRadius.circular(20),
-        //               // color: text== 'BTC' ? Color(0xFFa77030) :text== 'ETH' ?Color(0xFF2768ea) :text == 'USDT' ?Color(0xFF06759b) :text== 'USDC' ?Color(0xFF0566e8):text== 'EUROC' ?Color(0xFF016ace) :text== 'PAXG' ?Color(0xFFFFFFFF):text== 'BUSD' ?Color(0xFFf3ba2f):Colors.transparent,
-        //
-        //               color: swap.showCoin["code"] == 'BTC'
-        //                   ? const Color(0xFFa77030)
-        //                   : swap.showCoin["code"] == 'ETH'
-        //                   ? const Color(0xFF2768ea)
-        //                   : swap.showCoin["code"] == 'USDT'
-        //                   ? const Color(0xFF06759b)
-        //                   : swap.showCoin["code"] == 'USDC'
-        //                   ? const Color(0xFF0566e8)
-        //                   : swap.showCoin["code"] == 'EUROC'
-        //                   ? const Color(0xFF016ace)
-        //                   : swap.showCoin["code"] == 'PAXG'
-        //                   ? const Color(0xFFFFFFFF)
-        //                   : swap.showCoin["code"] ==
-        //                   'BUSD'
-        //                   ? const Color(0xFFf3ba2f)
-        //                   : Colors.transparent,
-        //             ),
-        //           ),
-        //           Column(
-        //             children: [
-        //               Text(
-        //                 "1 USD ~ ${swap.showCoin['currency']} ${swap.showCoin["code"]}",
-        //                 style: const TextStyle(color: Colors.white),
-        //               ),
-        //               S.H(20),
-        //               InkWell(
-        //                 onTap: () {
-        //                   showDialog(
-        //                       context: context,
-        //                       builder: (context) => showEdit(
-        //                           swap.showCoin["code"],
-        //                           swap.showCoin["icon"]));
-        //                 },
-        //                 child: Container(
-        //                   height: 40,
-        //                   width: 150,
-        //                   decoration: BoxDecoration(
-        //                     color: Colors.white.withOpacity(0.5),
-        //                     borderRadius: BorderRadius.circular(10),
-        //                   ),
-        //                   child: const Center(
-        //                     child: Text('EDIT'),
-        //                   ),
-        //                 ),
-        //               )
-        //             ],
-        //           )
-        //         ],
-        //       ),
-        //       S.W(50),
-        //       Container(
-        //         width: 300,
-        //         height: 450,
-        //         alignment: Alignment.topLeft,
-        //         child: Column(
-        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //           children: List.generate(
-        //             swap.swapSetting.length,
-        //                 (index) => InkWell(
-        //                 onTap: () {
-        //                   swap.changeArray(index);
-        //                 },
-        //                 child: AnimatedContainer(
-        //                   duration: Duration(milliseconds: 500 + index * 100),
-        //                   padding: EdgeInsets.only(left: padding),
-        //                   child: rowCoin(
-        //                       swap.swapSetting[index]["code"],
-        //                       swap.swapSetting[index]["currency"],
-        //                       swap.swapSetting[index]["icon"]),
-        //                 )),
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // )
-    );
+    return Container();
+    //   GetBuilder<SwapSettingController>(
+    //     init: SwapSettingController(),
+    //     builder: (swap) =>
+    //     // isDesktop&&isTablet
+    //     //     ?
+    //     Row(
+    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //           crossAxisAlignment: CrossAxisAlignment.center,
+    //           children: [
+    //             Container(
+    //               height: Get.height,
+    //               width: 230,
+    //               alignment: Alignment.topCenter,
+    //               child: Column(
+    //                 children: [
+    //                   Container(
+    //                     width: 150,
+    //                     height: 150,
+    //                     decoration: BoxDecoration(
+    //                       shape: BoxShape.circle,
+    //                       image: DecorationImage(
+    //                         image: AssetImage(swap.showCoin["icon"]),
+    //                         fit: BoxFit.cover,
+    //                       ),
+    //                       // borderRadius: BorderRadius.circular(20),
+    //                       // color: text== 'BTC' ? Color(0xFFa77030) :text== 'ETH' ?Color(0xFF2768ea) :text == 'USDT' ?Color(0xFF06759b) :text== 'USDC' ?Color(0xFF0566e8):text== 'EUROC' ?Color(0xFF016ace) :text== 'PAXG' ?Color(0xFFFFFFFF):text== 'BUSD' ?Color(0xFFf3ba2f):Colors.transparent,
+    //
+    //                       color: swap.showCoin["code"] == 'BTC'
+    //                           ? const Color(0xFFa77030)
+    //                           : swap.showCoin["code"] == 'ETH'
+    //                               ? const Color(0xFF2768ea)
+    //                               : swap.showCoin["code"] == 'USDT'
+    //                                   ? const Color(0xFF06759b)
+    //                                   : swap.showCoin["code"] == 'USDC'
+    //                                       ? const Color(0xFF0566e8)
+    //                                       : swap.showCoin["code"] == 'EUROC'
+    //                                           ? const Color(0xFF016ace)
+    //                                           : swap.showCoin["code"] == 'PAXG'
+    //                                               ? const Color(0xFFFFFFFF)
+    //                                               : swap.showCoin["code"] ==
+    //                                                       'BUSD'
+    //                                                   ? const Color(0xFFf3ba2f)
+    //                                                   : Colors.transparent,
+    //                     ),
+    //                   ),
+    //                   S.H(20),
+    //                   Text(
+    //                     "1 USD ~ ${swap.showCoin['currency']} ${swap.showCoin["code"]}",
+    //                     style: const TextStyle(color: Colors.white),
+    //                   ),
+    //                   S.H(20),
+    //                   InkWell(
+    //                     onTap: () {
+    //                       showDialog(
+    //                           context: context,
+    //                           builder: (context) => showEdit(
+    //                               swap.showCoin["code"],
+    //                               swap.showCoin["icon"]));
+    //                     },
+    //                     child: Container(
+    //                       height: 40,
+    //                       width: 150,
+    //                       decoration: BoxDecoration(
+    //                         color: Colors.white.withOpacity(0.5),
+    //                         borderRadius: BorderRadius.circular(10),
+    //                       ),
+    //                       child: const Center(
+    //                         child: Text('EDIT'),
+    //                       ),
+    //                     ),
+    //                   )
+    //                 ],
+    //               ),
+    //             ),
+    //             // S.W(50),
+    //             Container(
+    //               width: 300,
+    //               height: 450,
+    //               alignment: Alignment.topLeft,
+    //               child: Column(
+    //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //                 children: List.generate(
+    //                   swap.swapSetting.length,
+    //                   (index) => InkWell(
+    //                       onTap: () {
+    //                         swap.changeArray(index);
+    //                       },
+    //                       child: AnimatedContainer(
+    //                         duration: Duration(milliseconds: 500 + index * 100),
+    //                         padding: EdgeInsets.only(left: padding),
+    //                         child: rowCoin(
+    //                             swap.swapSetting[index]["code"],
+    //                             swap.swapSetting[index]["currency"],
+    //                             swap.swapSetting[index]["icon"]),
+    //                       )),
+    //                 ),
+    //               ),
+    //             ),
+    //           ],
+    //         )
+    //     //     : Container(
+    //     //   child: Column(
+    //     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //     //     children: [
+    //     //       Row(
+    //     //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //     //         children: [
+    //     //           Container(
+    //     //             width: 100,
+    //     //             height: 100,
+    //     //             decoration: BoxDecoration(
+    //     //               shape: BoxShape.circle,
+    //     //               image: DecorationImage(
+    //     //                 image: AssetImage(swap.showCoin["icon"]),
+    //     //                 fit: BoxFit.cover,
+    //     //               ),
+    //     //               // borderRadius: BorderRadius.circular(20),
+    //     //               // color: text== 'BTC' ? Color(0xFFa77030) :text== 'ETH' ?Color(0xFF2768ea) :text == 'USDT' ?Color(0xFF06759b) :text== 'USDC' ?Color(0xFF0566e8):text== 'EUROC' ?Color(0xFF016ace) :text== 'PAXG' ?Color(0xFFFFFFFF):text== 'BUSD' ?Color(0xFFf3ba2f):Colors.transparent,
+    //     //
+    //     //               color: swap.showCoin["code"] == 'BTC'
+    //     //                   ? const Color(0xFFa77030)
+    //     //                   : swap.showCoin["code"] == 'ETH'
+    //     //                   ? const Color(0xFF2768ea)
+    //     //                   : swap.showCoin["code"] == 'USDT'
+    //     //                   ? const Color(0xFF06759b)
+    //     //                   : swap.showCoin["code"] == 'USDC'
+    //     //                   ? const Color(0xFF0566e8)
+    //     //                   : swap.showCoin["code"] == 'EUROC'
+    //     //                   ? const Color(0xFF016ace)
+    //     //                   : swap.showCoin["code"] == 'PAXG'
+    //     //                   ? const Color(0xFFFFFFFF)
+    //     //                   : swap.showCoin["code"] ==
+    //     //                   'BUSD'
+    //     //                   ? const Color(0xFFf3ba2f)
+    //     //                   : Colors.transparent,
+    //     //             ),
+    //     //           ),
+    //     //           Column(
+    //     //             children: [
+    //     //               Text(
+    //     //                 "1 USD ~ ${swap.showCoin['currency']} ${swap.showCoin["code"]}",
+    //     //                 style: const TextStyle(color: Colors.white),
+    //     //               ),
+    //     //               S.H(20),
+    //     //               InkWell(
+    //     //                 onTap: () {
+    //     //                   showDialog(
+    //     //                       context: context,
+    //     //                       builder: (context) => showEdit(
+    //     //                           swap.showCoin["code"],
+    //     //                           swap.showCoin["icon"]));
+    //     //                 },
+    //     //                 child: Container(
+    //     //                   height: 40,
+    //     //                   width: 150,
+    //     //                   decoration: BoxDecoration(
+    //     //                     color: Colors.white.withOpacity(0.5),
+    //     //                     borderRadius: BorderRadius.circular(10),
+    //     //                   ),
+    //     //                   child: const Center(
+    //     //                     child: Text('EDIT'),
+    //     //                   ),
+    //     //                 ),
+    //     //               )
+    //     //             ],
+    //     //           )
+    //     //         ],
+    //     //       ),
+    //     //       S.W(50),
+    //     //       Container(
+    //     //         width: 300,
+    //     //         height: 450,
+    //     //         alignment: Alignment.topLeft,
+    //     //         child: Column(
+    //     //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //     //           children: List.generate(
+    //     //             swap.swapSetting.length,
+    //     //                 (index) => InkWell(
+    //     //                 onTap: () {
+    //     //                   swap.changeArray(index);
+    //     //                 },
+    //     //                 child: AnimatedContainer(
+    //     //                   duration: Duration(milliseconds: 500 + index * 100),
+    //     //                   padding: EdgeInsets.only(left: padding),
+    //     //                   child: rowCoin(
+    //     //                       swap.swapSetting[index]["code"],
+    //     //                       swap.swapSetting[index]["currency"],
+    //     //                       swap.swapSetting[index]["icon"]),
+    //     //                 )),
+    //     //           ),
+    //     //         ),
+    //     //       ),
+    //     //     ],
+    //     //   ),
+    //     // )
+    // );
   }
 
   /// row for each coin 'ใส่รูปเหรียญ'

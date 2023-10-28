@@ -83,8 +83,7 @@ class AppPages {
     // GetPage(
     //   name: Paths.settings,
     //   transition: Transition.noTransition,
-    //   binding: CampaignBinding(),
-    //   page: () => const SettingScreen(),
+    //   // page: () => const SettingScreen(),
     // ),
   ];
 }
