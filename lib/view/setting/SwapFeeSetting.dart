@@ -16,6 +16,8 @@ class SwapFeeSetting extends StatefulWidget {
 
 class _SwapFeeSettingState extends State<SwapFeeSetting> {
   TextEditingController feeController = TextEditingController();
+  List indexPage = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  String showValue = '1';
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveBuilder.isMobile(context);
@@ -31,146 +33,212 @@ class _SwapFeeSettingState extends State<SwapFeeSetting> {
           border: Border.all(width: .4, color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(kBorderRadius),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Swap Fee Setting',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: kSpacing),
-            Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+        child: SingleChildScrollView(
+          // physics: NeverScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Swap Fee Setting',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                child: Text(
-                  DateFormat('d MMMM yyyy HH:mm a').format(DateTime.now()),
-                )),
-            SizedBox(height: kSpacing),
-            Container(
-              height: Get.height * 0.8,
-              child: GetBuilder<SwapSettingController>(
-                init: SwapSettingController(),
-                builder: (swap) => ListView.builder(
-                  itemCount: swap.swapSetting.length,
-                  itemBuilder: (context, index) => Container(
-                    height: 100,
-                    width: Get.width,
-                    decoration: BoxDecoration(
-                      color:
-                          index % 2 == 0 ? Colors.grey.shade100 : Colors.white,
-                      borderRadius: BorderRadius.circular(kBorderRadius),
-                    ),
+              ),
+              SizedBox(height: kSpacing),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                      ),
+                      child: Text(
+                        DateFormat('d MMMM yyyy HH:mm a').format(DateTime.now()),
+                      )),
+                  isMobile
+                      ? Container(
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey,
+                          ),
+                          child: DropdownButton(
+                            underline: Container(),
+                            items: [
+                              for(int i =0; i< indexPage.length; i++)
+                                DropdownMenuItem(
+                                  child: Text(indexPage[i]),
+                                  value: indexPage[i],
+                                )
+                            ], onChanged: (Object? value) {
+                              setState(() {
+                                showValue = value.toString();
+                              });
+                          },
+                          ),
+                        )
+                      : Container(
+                    height: 40,width: 200,
+                    // color: Colors.teal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                S.W(20),
-                                Center(
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        image:
-                                            AssetImage(swap.swapSetting[index]["icon"]),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                S.W(10),
-                                Center(child: Text(swap.swapSetting[index]['code'])),
-                              ],
-                            ),
-                            Padding(
-                              padding:  EdgeInsets.only(left: 20,top: 20),
-                              child: Container(
-                                width: 100,
-                                  child: Text('~ ${swap.swapSetting[index]['currency'].toString()}')),
-                            ),
-                          ],
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey,
+                          ),child: Center(child: FaIcon(FontAwesomeIcons.anglesLeft,color: Colors.white,)),
                         ),
                         Container(
-                          height: 30,
-                          width: 30,
+                          width: 80,
+                          height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          child: Center(child: FaIcon(FontAwesomeIcons.arrowRight)),
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey,
+                          ),child: Center(child: Text('หน้า 1',style: TextStyle(
+                          color: Colors.white),)),),
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.grey,
+                          ),child: Center(child: FaIcon(FontAwesomeIcons.anglesRight,color: Colors.white,))
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                S.W(20),
-                                Center(
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        image:
-                                        AssetImage(swap.coinSwap[index]["icon"]),
-                                        fit: BoxFit.cover,
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: kSpacing),
+              Container(
+                height: Get.height * 0.8,
+                child: GetBuilder<SwapSettingController>(
+                  init: SwapSettingController(),
+                  builder: (swap) => ListView.builder(
+                    itemCount: swap.swapSetting.length,
+                    itemBuilder: (context, index) => Container(
+                      height: 90,
+                      width: Get.width,
+                      decoration: BoxDecoration(
+                        color:
+                            index % 2 == 0 ? Colors.grey.shade100 : Colors.white,
+                        borderRadius: BorderRadius.circular(kBorderRadius),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  S.W(20),
+                                  Center(
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image:
+                                              AssetImage(swap.swapSetting[index]["icon"]),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                S.W(10),
-                                Center(child: Text(swap.coinSwap[index]['code'])),
-                              ],
-                            ),
-                            Padding(
-                              padding:  EdgeInsets.only(left: 20,top: 20),
-                              child: Container(
+                                  S.W(10),
+                                  Center(child: Text(swap.swapSetting[index]['code'])),
+                                ],
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.only(left: 20,top: 20),
+                                child: Container(
                                   width: 100,
-                                  child: Text('~ ${swap.coinSwap[index]['currency'].toString()}')),
+                                    child: Text('~ ${swap.swapSetting[index]['currency'].toString()}')),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(5)
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding:  EdgeInsets.only(right: 15),
-                          child: InkWell(
-                            onTap: (){
-                              showDialog(context: context, builder: (context)=>showEdit(swap.swapSetting[index]['currency'].toString(),swap.swapSetting[index]['icon'],swap.coinSwap[index]['currency'].toString(),swap.coinSwap[index]['icon']));
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade300,
-                                  borderRadius: BorderRadius.circular(5)
-                              ),child: Center(child: Text('Edit',style: TextStyle(color: Colors.black),))
+                            child: Center(child: FaIcon(FontAwesomeIcons.arrowRight)),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  S.W(20),
+                                  Center(
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image:
+                                          AssetImage(swap.coinSwap[index]["icon"]),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  S.W(10),
+                                  Center(child: Text(swap.coinSwap[index]['code'])),
+                                ],
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.only(left: 20,top: 20),
+                                child: Container(
+                                    width: 100,
+                                    child: Text('~ ${swap.coinSwap[index]['currency'].toString()}')),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.only(right: 15),
+                            child: InkWell(
+                              onTap: (){
+                                showDialog(context: context, builder: (context)=>showEdit(swap.swapSetting[index]['currency'].toString(),swap.swapSetting[index]['icon'],swap.coinSwap[index]['currency'].toString(),swap.coinSwap[index]['icon']));
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade300,
+                                    borderRadius: BorderRadius.circular(5)
+                                ),child: Center(child: Text('Edit',style: TextStyle(color: Colors.black),))
+                              ),
                             ),
                           ),
-                        ),
-                        // S.W(10)
-                      ],
+                          // S.W(10)
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            )
-          ],
-        ));
+              S.H(kSpacing*20),
+            ],
+          ),
+        )
+    );
   }
 
   Widget showEdit(textCoin, icon,textCoinSwap,iconSwap) => Dialog(

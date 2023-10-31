@@ -689,9 +689,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   width: Get.width * 2,
                                                   child: ListView.builder(
                                                       // padding: EdgeInsets.all(10),
-                                                      itemCount: 100,
-                                                      itemBuilder: (context,
-                                                              index) =>
+                                                      itemCount: userController
+                                                          .dataList.length,
+                                                      itemBuilder: (context, index) =>
                                                           Container(
                                                             constraints:
                                                                 BoxConstraints
@@ -705,27 +705,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                     .withOpacity(
                                                                         0.2),
                                                             child: Row(
-                                                              children: const [
+                                                              children:  [
                                                                 SizedBox(
                                                                     width: 200,
-                                                                    child: Text(
-                                                                        "Jitrawadee wanichphon")),
+                                                                    child: Text(userController.dataList[index]['name'])),
                                                                 SizedBox(
                                                                     width: 300,
-                                                                    child: Text(
-                                                                        "jitrawadee.wanichphon.pkg@gmail.com")),
+                                                                    child: Text(userController.dataList[index]['email'])),
                                                                 SizedBox(
                                                                     width: 200,
                                                                     child: Text(
-                                                                        "2023-10-27 09:00:00")),
+                                                                        userController.dataList[index]['createTime'])),
                                                                 SizedBox(
                                                                     width: 250,
                                                                     child: Text(
-                                                                        "vfiuigkdsagjckvhffdvfdbvifiu")),
+                                                                        userController.dataList[index]['uid'])),
                                                                 SizedBox(
                                                                     width: 200,
                                                                     child: Text(
-                                                                        "2023-10-27 09:09:00")),
+                                                                        userController.dataList[index]['last_time'])),
                                                               ],
                                                             ),
                                                           )),
@@ -1692,8 +1690,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                             10),
                                                     underline: Container(),
                                                     value: selectedValue,
-                                                    iconDisabledColor:
-                                                        Colors.grey,
+                                                    iconDisabledColor: Colors.grey,
                                                     isExpanded: false,
                                                     onChanged:
                                                         (String? newValue) {
@@ -1711,8 +1708,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                       isFirstTime = false;
                                                       setState(() {});
                                                     },
-                                                    items: options
-                                                        .map((String value) {
+                                                    items: options.map((String value) {
                                                       return DropdownMenuItem<
                                                           String>(
                                                         value: value,
@@ -1893,44 +1889,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   height: 500,
                                                   width: Get.width * 2,
                                                   child: ListView.builder(
-                                                      // padding: EdgeInsets.all(10),
-                                                      itemCount: 100,
-                                                      itemBuilder: (context,
-                                                              index) =>
+                                                    // padding: EdgeInsets.all(10),
+                                                      itemCount: userController
+                                                          .dataTest.length,
+                                                      itemBuilder: (context, index) =>
                                                           Container(
                                                             constraints:
-                                                                BoxConstraints
-                                                                    .expand(
-                                                                        height:
-                                                                            50),
+                                                            BoxConstraints
+                                                                .expand(
+                                                                height:
+                                                                50),
                                                             color: index % 2 ==
-                                                                    0
+                                                                0
                                                                 ? Colors.white
                                                                 : Colors.grey
-                                                                    .withOpacity(
-                                                                        0.2),
+                                                                .withOpacity(
+                                                                0.2),
                                                             child: Row(
-                                                              children: const [
+                                                              children:  [
                                                                 SizedBox(
                                                                     width: 200,
-                                                                    child: Text(
-                                                                        "Jitrawadee wanichphon")),
+                                                                    child: Text(userController.dataTest[index]['name'])),
                                                                 SizedBox(
                                                                     width: 300,
-                                                                    child: Text(
-                                                                        "jitrawadee.wanichphon.pkg@gmail.com")),
+                                                                    child: Text(userController.dataTest[index]['email'])),
                                                                 SizedBox(
                                                                     width: 200,
                                                                     child: Text(
-                                                                        "2023-10-27 09:00:00")),
+                                                                        userController.dataTest[index]['create_time'])),
                                                                 SizedBox(
                                                                     width: 250,
                                                                     child: Text(
-                                                                        "vfiuigkdsagjckvhffdvfdbvifiu")),
+                                                                        userController.dataTest[index]['uid'])),
                                                                 SizedBox(
                                                                     width: 200,
                                                                     child: Text(
-                                                                        "2023-10-27 09:09:00")),
+                                                                        userController.dataTest[index]['last_time'])),
                                                               ],
                                                             ),
                                                           )),

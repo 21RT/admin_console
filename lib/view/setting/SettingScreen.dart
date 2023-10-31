@@ -26,7 +26,8 @@ class _SettingScreenState extends State<SettingScreen> {
   final _settingSelect = TextEditingController();
 
   int _menuIndex = 0;
-  
+
+
   final _languageList = [
     {'language': 'ภาษาไทย', 'locale': const Locale('th', 'TH')},
     {'language': 'English', 'locale': const Locale('en', 'US')},
@@ -103,6 +104,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             IndexedStack(
                               index: _menuIndex,
                               children: [
+                                SwapFeeSetting(),
                                 // const PointSettings(),
                                 Column(),
                                 Column(),
@@ -167,6 +169,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             IndexedStack(
                               index: _menuIndex,
                               children: [
+                                SwapFeeSetting(),
                                 // const PointSettings(),
                                 Column(),
                                 Column(),
