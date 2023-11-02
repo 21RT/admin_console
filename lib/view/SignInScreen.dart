@@ -13,6 +13,7 @@ import 'package:moneymaker/controller/getController/userControl/userControl.dart
 import 'package:moneymaker/controller/translation/translation_key.dart';
 import 'package:moneymaker/model/theme/app_constants.dart';
 import 'package:moneymaker/model/theme/sizebox_wiget.dart';
+import 'package:moneymaker/view/DashboardScreen.dart';
 import 'package:moneymaker/view/components/loading_screen.dart';
 import 'package:moneymaker/view/components/responsive_builder.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -742,7 +743,11 @@ class _LoginScreenState extends State<SignInScreen> {
         AppLoader.loader(context);
 
         var data = await _auth.signInWithCredential(credential);
-        Get.offAllNamed('/dashboard');
+
+        AppLoader.dismiss(context);
+
+        Get.to(() => const DashboardScreen());
+        // Get.offAllNamed('/dashboard');
 
         // Check if data.user is of type User before accessing properties
         // if (data.user is User) {

@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moneymaker/controller/getController/BuildingApp.dart';
 import 'package:moneymaker/controller/translation/my.translations.dart';
-import 'package:moneymaker/model/route/app_page.dart';
 import 'package:moneymaker/model/theme/app_theme.dart';
-import 'package:moneymaker/view/DashboardScreen.dart';
+import 'package:moneymaker/view/SignInScreen.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
@@ -41,8 +40,9 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('th', 'TH'),
       theme: AppTheme.basic,
       initialBinding: BilndingsApp(context: context),
-      initialRoute: AppPages.initial,
-      getPages: AppPages.routes,
+      // initialRoute: AppPages.initial,
+      // getPages: AppPages.routes,
+      home: const SignInScreen(),
     );
   }
 }

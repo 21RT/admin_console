@@ -5,6 +5,7 @@ import 'package:moneymaker/controller/getController/components/appbarControl.dar
 import 'package:moneymaker/model/route/app_routes.dart';
 import 'package:moneymaker/model/theme/app_constants.dart';
 import 'package:moneymaker/model/theme/sizebox_wiget.dart';
+import 'package:moneymaker/view/SignInScreen.dart';
 import 'package:moneymaker/view/components/loading_screen.dart';
 
 class AppBarAdmin extends StatefulWidget {
@@ -146,7 +147,11 @@ class _AppBarAdminState extends State<AppBarAdmin> {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        Navigator.pushReplacementNamed(context, Paths.signIn);
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignInScreen()));
                                         // Navigator.pop(context);
                                       },
                                       child: Container(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moneymaker/model/route/app_routes.dart';
 import 'package:moneymaker/model/theme/sizebox_wiget.dart';
+import 'package:moneymaker/view/SignInScreen.dart';
 
 class AdminDrawer extends StatelessWidget {
   const AdminDrawer({Key? key}) : super(key: key);
@@ -110,7 +111,11 @@ class AdminDrawer extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, Paths.signIn);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SignInScreen()));
                           // Navigator.pop(context);
                         },
                         child: Container(
